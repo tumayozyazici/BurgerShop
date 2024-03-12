@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Burger.DATA\Burger.DATA.csproj" />
+    <ProjectReference Include="..\Burger.REPO\Burger.REPO.csproj" />
+    <ProjectReference Include="..\Burger.SERVICE\Burger.SERVICE.csproj" />
+  </ItemGroup>
+
+</Project>
