@@ -13,6 +13,12 @@ namespace Burger.SERVICE.Services.ExtraService
     public class ExtraSERVICE : IExtraSERVICE
     {
         private readonly IExtraREPO extraREPO;
+
+        public ExtraSERVICE(IExtraREPO extraREPO)
+        {
+            this.extraREPO = extraREPO;
+        }
+
         public int Add(Extra entity)
         {
             entity.CreateDate = DateTime.Now;
