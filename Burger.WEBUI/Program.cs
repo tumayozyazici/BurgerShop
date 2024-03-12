@@ -43,7 +43,7 @@ namespace Burger.WEBUI
 
             // Service
             builder.Services.AddScoped<IByProductSERVICE, ByProductSERVICE>();
-            builder.Services.AddScoped<IExtraService, ExtraSERVICE>();
+            builder.Services.AddScoped<IExtraSERVICE, ExtraSERVICE>();
             builder.Services.AddScoped<IHamburgerExtraSERVICE, HamburgerExtraSERVICE>();
             builder.Services.AddScoped<IHamburgerSERVICE, HamburgerSERVICE>();
             builder.Services.AddScoped<IMenuByProductSERVICE, MenuByProductSERVICE>();
