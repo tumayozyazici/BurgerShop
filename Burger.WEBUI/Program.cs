@@ -1,3 +1,4 @@
+using Burger.DATA.Concrete;
 using Burger.REPO.Concrete;
 using Burger.REPO.Contexts;
 using Burger.REPO.Interface;
@@ -12,6 +13,7 @@ using Burger.SERVICE.Services.OrderByProductService;
 using Burger.SERVICE.Services.OrderHamburgerService;
 using Burger.SERVICE.Services.OrderMenuService;
 using Burger.SERVICE.Services.OrderService;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Burger.WEBUI
@@ -54,7 +56,14 @@ namespace Burger.WEBUI
             builder.Services.AddScoped<IOrderMenuSERVICE, OrderMenuSERVICE>();
             builder.Services.AddScoped<IOrderSERVICE, OrderSERVICE>();
 
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminPolicy", policy =>
+                    policy.RequireRole("admin"));
+            });
 
+            //IDENTITY  
+            builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<BurgerDbContext>().AddDefaultTokenProviders();
 
             var app = builder.Build();
 
@@ -71,13 +80,18 @@ namespace Burger.WEBUI
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "areas",
-                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                //endpoints.MapControllerRoute(
+                //    name: "areas",
+                //    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                app.MapAreaControllerRoute(
+                name: "admin",
+                areaName: "Admin",
+                pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
                     name: "default",

@@ -9,23 +9,23 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="Burgerassets/img/favicon.png" rel="icon">
-    <link href="Burgerassets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="~/Burgerassets/img/favicon.png" rel="icon">
+    <link href="~/Burgerassets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="Burgerassets/vendor/animate.css/animate.min.css" rel="stylesheet">
-    <link href="Burgerassets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="Burgerassets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="Burgerassets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="Burgerassets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="Burgerassets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="Burgerassets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="~/Burgerassets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="~/Burgerassets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="~/Burgerassets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Burgerassets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/Burgerassets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/Burgerassets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="~/Burgerassets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-    <!-- Template Main CSS File -->f
-    <link href="Burgerassets/css/style.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="~/Burgerassets/css/style.css" rel="stylesheet">
 
     <!-- =======================================================
     * Template Name: Restaurantly
@@ -47,63 +47,71 @@
 
             <div class="contact-info d-flex align-items-center">
                 <i class="bi bi-phone d-flex align-items-center"><span>+1 5589 55488 55</span></i>
-                <i class="bi bi-clock d-flex align-items-center ms-4"><span> Mon-Sat: 11AM - 23PM</span></i>
-            </div>
 
-            <div class="languages d-none d-md-flex align-items-center">
-                <ul>
-                    <li>En</li>
-                    <li><a href="#">De</a></li>
-                </ul>
+                <i class="bi bi-clock d-flex align-items-center ms-4"><span> @DateTime.Now.Date.ToString("dd MMMM yyyy")</span></i>
             </div>
         </div>
     </div>
 
     <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top d-flex align-items-cente">
+    <header id="header" class="fixed-top d-flex align-items-center">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
 
-            <h1 class="logo me-auto me-lg-0"><a href="index.html">Restaurantly</a></h1>
+            <h1 class="logo me-auto me-lg-0"><a href="index.html">BurgerShop</a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="Burgerassets/img/logo.png" alt="" class="img-fluid"></a>-->
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
-                    <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#about">About</a></li>
-                    <li><a class="nav-link scrollto" href="#menu">Menu</a></li>
-                    <li><a class="nav-link scrollto" href="#specials">Specials</a></li>
-                    <li><a class="nav-link scrollto" href="#events">Events</a></li>
-                    <li><a class="nav-link scrollto" href="#chefs">Chefs</a></li>
-                    <li><a class="nav-link scrollto" href="#gallery">Gallery</a></li>
+                    <li><a class="nav-link scrollto active" asp-action="Index" asp-controller="Home">AnaSayfa</a></li>
+                    <li><a class="nav-link scrollto" href="#about">Hakkımızda</a></li>
+                    <li><a class="nav-link scrollto" href="#menu">Menü</a></li>
+                    <li><a class="nav-link scrollto" href="#specials">Spesyaller</a></li>
+                    <li><a class="nav-link scrollto" href="#events">Etkinlikler</a></li>
+                    <li><a class="nav-link scrollto" href="#chefs">Şefler</a></li>
+                    <li><a class="nav-link scrollto" href="#gallery">Galeri</a></li>
+                    @* <li class="dropdown">
+                    <a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                    <li><a href="#">Drop Down 1</a></li>
                     <li class="dropdown">
-                        <a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-                        <ul>
-                            <li><a href="#">Drop Down 1</a></li>
-                            <li class="dropdown">
-                                <a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                                <ul>
-                                    <li><a href="#">Deep Drop Down 1</a></li>
-                                    <li><a href="#">Deep Drop Down 2</a></li>
-                                    <li><a href="#">Deep Drop Down 3</a></li>
-                                    <li><a href="#">Deep Drop Down 4</a></li>
-                                    <li><a href="#">Deep Drop Down 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Drop Down 2</a></li>
-                            <li><a href="#">Drop Down 3</a></li>
-                            <li><a href="#">Drop Down 4</a></li>
-                        </ul>
+                    <a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+                    <ul>
+                    <li><a href="#">Deep Drop Down 1</a></li>
+                    <li><a href="#">Deep Drop Down 2</a></li>
+                    <li><a href="#">Deep Drop Down 3</a></li>
+                    <li><a href="#">Deep Drop Down 4</a></li>
+                    <li><a href="#">Deep Drop Down 5</a></li>
+                    </ul>
                     </li>
+                    <li><a href="#">Drop Down 2</a></li>
+                    <li><a href="#">Drop Down 3</a></li>
+                    <li><a href="#">Drop Down 4</a></li>
+                    </ul>
+                    </li> *@
                     <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                     @*
-                        Login olma durumuna göre admin paneli görünür olacak
+                    Login olma durumuna göre admin paneli görünür olacak
                     *@
-                    <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin Paneli</a></li>
+                    
+                    @if (User.IsInRole("admin") && User.Identity.IsAuthenticated)
+                    {
+                        <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin Paneli</a></li>
+                    }
+
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
-            <a href="#book-a-table" class="book-a-table-btn scrollto d-none d-lg-flex">Book a table</a>
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <a class="book-a-table-btn scrollto d-none d-lg-flex" asp-action="Login" asp-controller="Home">Üye Girişi</a>
+                <a class="book-a-table-btn scrollto d-none d-lg-flex" asp-action="Register" asp-controller="Home">Üye Kayıt</a>    @*  Üye Girişi *@
+            }
+            else
+            {
+                <a class="book-a-table-btn scrollto d-none d-lg-flex" asp-action="Logout" asp-controller="Home">Üye Çıkışı</a>
+            }
+
 
         </div>
     </header><!-- End Header -->
@@ -212,10 +220,12 @@
                 <div class="row" data-aos="fade-up" data-aos-delay="100">
                     <div class="col-lg-12 d-flex justify-content-center">
                         <ul id="menu-flters">
-                            <li data-filter="*" class="filter-active">All</li>
-                            <li data-filter=".filter-starters">Starters</li>
-                            <li data-filter=".filter-salads">Salads</li>
-                            <li data-filter=".filter-specialty">Specialty</li>
+                            <li data-filter="*" class="filter-active">Menüler</li>
+                            <li data-filter=".filter-starters">Burgerler</li>
+                            <li data-filter=".filter-salads">Çıtırlar</li>
+                            <li data-filter=".filter-specialty">İçecekler</li>
+                            <li data-filter=".filter-specialty">Ekstralar</li>
+
                         </ul>
                     </div>
                 </div>
@@ -513,55 +523,55 @@
             </div>
         </section><!-- End Events Section -->
         <!-- ======= Book A Table Section ======= -->
-        <section id="book-a-table" class="book-a-table">
-            <div class="container" data-aos="fade-up">
+        @* <section id="book-a-table" class="book-a-table">
+        <div class="container" data-aos="fade-up">
 
-                <div class="section-title">
-                    <h2>Reservation</h2>
-                    <p>Book a Table</p>
-                </div>
+        <div class="section-title">
+        <h2>Reservation</h2>
+        <p>Book a Table</p>
+        </div>
 
-                <form action="Burgerforms/book-a-table.php" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 form-group">
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                            <div class="validate"></div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
-                            <div class="validate"></div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                            <input type="text" class="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                            <div class="validate"></div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 form-group mt-3">
-                            <input type="text" name="date" class="form-control" id="date" placeholder="Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                            <div class="validate"></div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 form-group mt-3">
-                            <input type="text" class="form-control" name="time" id="time" placeholder="Time" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                            <div class="validate"></div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 form-group mt-3">
-                            <input type="number" class="form-control" name="people" id="people" placeholder="# of people" data-rule="minlen:1" data-msg="Please enter at least 1 chars">
-                            <div class="validate"></div>
-                        </div>
-                    </div>
-                    <div class="form-group mt-3">
-                        <textarea class="form-control" name="message" rows="5" placeholder="Message"></textarea>
-                        <div class="validate"></div>
-                    </div>
-                    <div class="mb-3">
-                        <div class="loading">Loading</div>
-                        <div class="error-message"></div>
-                        <div class="sent-message">Your booking request was sent. We will call back or send an Email to confirm your reservation. Thank you!</div>
-                    </div>
-                    <div class="text-center"><button type="submit">Book a Table</button></div>
-                </form>
+        <form action="Burgerforms/book-a-table.php" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
+        <div class="row">
+        <div class="col-lg-4 col-md-6 form-group">
+        <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+        <div class="validate"></div>
+        </div>
+        <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
+        <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
+        <div class="validate"></div>
+        </div>
+        <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
+        <input type="text" class="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+        <div class="validate"></div>
+        </div>
+        <div class="col-lg-4 col-md-6 form-group mt-3">
+        <input type="text" name="date" class="form-control" id="date" placeholder="Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+        <div class="validate"></div>
+        </div>
+        <div class="col-lg-4 col-md-6 form-group mt-3">
+        <input type="text" class="form-control" name="time" id="time" placeholder="Time" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+        <div class="validate"></div>
+        </div>
+        <div class="col-lg-4 col-md-6 form-group mt-3">
+        <input type="number" class="form-control" name="people" id="people" placeholder="# of people" data-rule="minlen:1" data-msg="Please enter at least 1 chars">
+        <div class="validate"></div>
+        </div>
+        </div>
+        <div class="form-group mt-3">
+        <textarea class="form-control" name="message" rows="5" placeholder="Message"></textarea>
+        <div class="validate"></div>
+        </div>
+        <div class="mb-3">
+        <div class="loading">Loading</div>
+        <div class="error-message"></div>
+        <div class="sent-message">Your booking request was sent. We will call back or send an Email to confirm your reservation. Thank you!</div>
+        </div>
+        <div class="text-center"><button type="submit">Book a Table</button></div>
+        </form>
 
-            </div>
-        </section><!-- End Book A Table Section -->
+        </div>
+        </section><!-- End Book A Table Section --> *@
         <!-- ======= Testimonials Section ======= -->
         <section id="testimonials" class="testimonials section-bg">
             <div class="container" data-aos="fade-up">
@@ -650,8 +660,8 @@
 
             <div class="container" data-aos="fade-up">
                 <div class="section-title">
-                    <h2>Gallery</h2>
-                    <p>Some photos from Our Restaurant</p>
+                    <h2>Galeri</h2>
+                    <p>Restoranımızdan Bazı Görüntüler</p>
                 </div>
             </div>
 
@@ -733,7 +743,7 @@
 
                 <div class="section-title">
                     <h2>Chefs</h2>
-                    <p>Our Proffesional Chefs</p>
+                    <p>Şeflerimiz</p>
                 </div>
 
                 <div class="row">
@@ -743,7 +753,7 @@
                             <img src="Burgerassets/img/chefs/chefs-1.jpg" class="img-fluid" alt="">
                             <div class="member-info">
                                 <div class="member-info-content">
-                                    <h4>Walter White</h4>
+                                    <h4>Melih Er</h4>
                                     <span>Master Chef</span>
                                 </div>
                                 <div class="social">
@@ -761,7 +771,7 @@
                             <img src="Burgerassets/img/chefs/chefs-2.jpg" class="img-fluid" alt="">
                             <div class="member-info">
                                 <div class="member-info-content">
-                                    <h4>Sarah Jhonson</h4>
+                                    <h4>Cemre Metin Dağ</h4>
                                     <span>Patissier</span>
                                 </div>
                                 <div class="social">
@@ -779,7 +789,7 @@
                             <img src="Burgerassets/img/chefs/chefs-3.jpg" class="img-fluid" alt="">
                             <div class="member-info">
                                 <div class="member-info-content">
-                                    <h4>William Anderson</h4>
+                                    <h4>Suat Tümay Özyazıcı</h4>
                                     <span>Cook</span>
                                 </div>
                                 <div class="social">
@@ -801,13 +811,13 @@
             <div class="container" data-aos="fade-up">
 
                 <div class="section-title">
-                    <h2>Contact</h2>
-                    <p>Contact Us</p>
+                    <h2>Ulaşım</h2>
+                    <p>Bize Ulaşın</p>
                 </div>
             </div>
 
             <div data-aos="fade-up">
-                <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
+                <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d316.5634722087112!2d29.023148229044725!3d40.98856914758098!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab98565932cb9%3A0xafaaa9dbc4bf05ab!2sBilgeAdam%20Akademi%20Kad%C4%B1k%C3%B6y!5e0!3m2!1sen!2str!4v1710318473495!5m2!1sen!2str" frameborder="0" allowfullscreen></iframe>
             </div>
 
             <div class="container" data-aos="fade-up">
@@ -818,28 +828,28 @@
                         <div class="info">
                             <div class="address">
                                 <i class="bi bi-geo-alt"></i>
-                                <h4>Location:</h4>
-                                <p>A108 Adam Street, New York, NY 535022</p>
+                                <h4>Konum:</h4>
+                                <p>Kadıköy BilgeAdam Akademi</p>
                             </div>
 
                             <div class="open-hours">
                                 <i class="bi bi-clock"></i>
-                                <h4>Open Hours:</h4>
+                                <h4>Açık Saatler:</h4>
                                 <p>
-                                    Monday-Saturday:<br>
-                                    11:00 AM - 2300 PM
+                                    Pazartesi-Cumartesi:<br>
+                                    11:00 AM - 23:00 PM
                                 </p>
                             </div>
 
                             <div class="email">
                                 <i class="bi bi-envelope"></i>
                                 <h4>Email:</h4>
-                                <p>info@example.com</p>
+                                <p>info@burgershop.com</p>
                             </div>
 
                             <div class="phone">
                                 <i class="bi bi-phone"></i>
-                                <h4>Call:</h4>
+                                <h4>Telefon:</h4>
                                 <p>+1 5589 55488 55s</p>
                             </div>
 
@@ -852,24 +862,24 @@
                         <form action="Burgerforms/contact.php" method="post" role="form" class="php-email-form">
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Adınız" required>
                                 </div>
                                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="E-mailiniz" required>
                                 </div>
                             </div>
                             <div class="form-group mt-3">
-                                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                                <input type="text" class="form-control" name="subject" id="subject" placeholder="Konu" required>
                             </div>
                             <div class="form-group mt-3">
-                                <textarea class="form-control" name="message" rows="8" placeholder="Message" required></textarea>
+                                <textarea class="form-control" name="message" rows="8" placeholder="Mesajınız.." required></textarea>
                             </div>
                             <div class="my-3">
                                 <div class="loading">Loading</div>
                                 <div class="error-message"></div>
                                 <div class="sent-message">Your message has been sent. Thank you!</div>
                             </div>
-                            <div class="text-center"><button type="submit">Send Message</button></div>
+                            <div class="text-center"><button type="submit">Yolla!</button></div>
                         </form>
 
                     </div>
@@ -958,14 +968,14 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
-    <script src="Burgerassets/vendor/aos/aos.js"></script>
-    <script src="Burgerassets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="Burgerassets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="Burgerassets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="Burgerassets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="Burgerassets/vendor/php-email-form/validate.js"></script>
+    <script src="~/Burgerassets/vendor/aos/aos.js"></script>
+    <script src="~/urgerassets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Burgerassets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="~/Burgerassets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="~/Burgerassets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="~/Burgerassets/vendor/php-email-form/validate.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="Burgerassets/js/main.js"></script>
+    <script src="~/Burgerassets/js/main.js"></script>
 </body>
 </html>

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Burger.REPO.Migrations
 {
     [DbContext(typeof(BurgerDbContext))]
-    [Migration("20240312093417_dbCatalog")]
-    partial class dbCatalog
+    [Migration("20240313094030_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
