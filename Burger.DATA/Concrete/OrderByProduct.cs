@@ -10,8 +10,8 @@ namespace Burger.DATA.Concrete
     public class OrderByProduct : BaseEntity
     {
         public int OrderId { get; set; }
-        public Order Order { get; set; }
+        public virtual Order Order { get; set; }
         public int ByProductId { get; set; }
-        public ByProduct ByProduct { get; set; }
+        public virtual ByProduct ByProduct { get; set; }
     }
 }

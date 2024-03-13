@@ -10,10 +10,10 @@ namespace Burger.DATA.Concrete
     public class HamburgerExtra : BaseEntity
     {
         public int HamburgerId { get; set; }
-        public Hamburger Hamburger { get; set; }
+        public virtual Hamburger Hamburger { get; set; }
 
         public int ExtraId { get; set; }
-        public Extra Extra { get; set; }
+        public virtual Extra Extra { get; set; }
 
     }
 }

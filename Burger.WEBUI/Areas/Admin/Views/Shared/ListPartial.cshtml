@@ -1,0 +1,42 @@
+﻿@using Burger.DATA.Concrete
+@model List<Hamburger>
+
+
+
+<div class="container">
+    <div class="row justify-content-end">
+        <div class="col-10">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">@ViewBag.data Adı</th>
+                        <th scope="col">Açıklama</th>
+                        <th scope="col">Fiyat</th>
+                        @* <th scope="col">Price</th> *@
+                        <th scope="col">Status</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Hamburger item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@item.Name</th>
+                            <td>@item.Description</td>
+                            <td>@item.Price ₺</td>
+                            <td>@item.Status</td>
+                            <td>
+                                <a class="btn btn-success" asp-route-id=@item.Id asp-controller="CrudBurger" asp-action="Update">Güncelle</a>
+                                <a class="btn btn-danger" asp-route-id=@item.Id asp-controller="CrudBurger" asp-action="Delete">Sil</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <a class="btn btn-primary" asp-controller="CrudBurger" asp-action="Create">Burger Ekle</a>
+
+        </div>
+
+    </div>
+
+</div>

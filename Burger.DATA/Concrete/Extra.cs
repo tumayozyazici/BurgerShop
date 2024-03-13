@@ -9,8 +9,6 @@ namespace Burger.DATA.Concrete
 {
     public class Extra : BaseEntity
     {
-       
-
         public string Name { get; set; }
 
         public double Price { get; set; }

@@ -19,7 +19,7 @@ namespace Burger.DATA.Concrete
 
 
         //Nav
-        public virtual ICollection<HamburgerExtra> HamburgerExtras { get; set; }
+        public virtual ICollection<HamburgerExtra>? HamburgerExtras { get; set; }
         public virtual ICollection<OrderHamburger> OrderHamburgers { get; set; }
         public virtual ICollection<MenuHamburger> MenuHamburgers { get; set; }
     }

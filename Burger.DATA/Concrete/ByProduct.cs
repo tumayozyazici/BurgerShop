@@ -19,6 +19,8 @@ namespace Burger.DATA.Concrete
 
         public Size Size { get; set; } = Size.Medium;
 
+        public ByProductType ByProductType { get; set; }
+
 
         //Nav
         public virtual ICollection<MenuByProduct> MenuByProducts { get; set; }
