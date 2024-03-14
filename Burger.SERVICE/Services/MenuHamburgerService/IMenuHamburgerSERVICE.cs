@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Burger.DATA.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,10 @@ namespace Burger.SERVICE.Services.MenuHamburgerService
 {
     public interface IMenuHamburgerSERVICE
     {
+        int Create(IEnumerable<MenuHamburger> entities);
+        int Update(IEnumerable<MenuHamburger> entities);
+        int Delete(IEnumerable<MenuHamburger> entities);
+        IEnumerable<MenuHamburger> GetByMenuId(int menuId);
+        IEnumerable<MenuHamburger> GetByBurgerId(int burgerId);
     }
 }
