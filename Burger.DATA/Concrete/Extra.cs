@@ -13,6 +13,8 @@ namespace Burger.DATA.Concrete
 
         public double Price { get; set; }
 
+        public string? Description { get; set; }
+
         //Nav
         public virtual ICollection<HamburgerExtra> HamburgerExtras { get; set; }
     }

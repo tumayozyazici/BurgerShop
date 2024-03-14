@@ -22,6 +22,7 @@ namespace Burger.WEBUI.Areas.Admin.Controllers
         {
             var result = await hamburgerService.GetAllAsync();
             ViewBag.data = "Burger";
+            ViewBag.controller = "CrudBurger";
             if (result.Count > 0)
             {
                 return View(result);

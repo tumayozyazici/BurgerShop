@@ -9,5 +9,10 @@ namespace Burger.REPO.Interface
 {
     public interface IOrderByProductREPO : IBaseREPO<OrderByProduct>
     {
+        int Create(IEnumerable<OrderByProduct> entities);
+        int Update(IEnumerable<OrderByProduct> entities);
+        int Delete(IEnumerable<OrderByProduct> entities);
+        IEnumerable<OrderByProduct> GetByOrderId(int id);
+        IEnumerable<OrderByProduct> GetByByProductId(int id);
     }
 }

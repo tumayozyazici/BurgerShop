@@ -1,5 +1,6 @@
 ﻿@using Burger.DATA.Concrete
-@model List<Hamburger>
+@model List<Extra>
+
 
 
 
@@ -9,7 +10,7 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">Burger Adı</th>
+                        <th scope="col">Ekstra Adı</th>
                         <th scope="col">Açıklama</th>
                         <th scope="col">Fiyat</th>
                         @* <th scope="col">Price</th> *@
@@ -18,7 +19,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (Hamburger item in Model)
+                    @foreach (Extra item in Model)
                     {
                         <tr>
                             <th scope="row">@item.Name</th>
@@ -26,14 +27,14 @@
                             <td>@item.Price ₺</td>
                             <td>@item.Status</td>
                             <td>
-                                <a class="btn btn-success" asp-route-id=@item.Id asp-controller="CrudBurger" asp-action="Update">Güncelle</a>
-                                <a class="btn btn-danger" asp-route-id=@item.Id asp-controller="CrudBurger" asp-action="Delete">Sil</a>
+                                <a class="btn btn-success" asp-route-id=@item.Id asp-controller="CrudExtra" asp-action="Update">Güncelle</a>
+                                <a class="btn btn-danger" asp-route-id=@item.Id asp-controller="CrudExtra" asp-action="Delete">Sil</a>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
-            <a class="btn btn-primary" asp-controller="CrudBurger" asp-action="Create">Burger Ekle</a>
+            <a class="btn btn-primary" asp-controller="CrudExtra" asp-action="Create">Ekstra Ekle</a>
 
         </div>
 
