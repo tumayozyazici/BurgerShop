@@ -27,6 +27,11 @@ namespace Burger.SERVICE.Services.MenuHamburgerService
             return _menuHamburgerREPO.Delete(entities);
         }
 
+        public Task<List<MenuHamburger>> GetAllAsync()
+        {
+            return _menuHamburgerREPO.GetAllAsync();
+        }
+
         public IEnumerable<MenuHamburger> GetByBurgerId(int burgerId)
         {
             return _menuHamburgerREPO.GetByBurgerId(burgerId);

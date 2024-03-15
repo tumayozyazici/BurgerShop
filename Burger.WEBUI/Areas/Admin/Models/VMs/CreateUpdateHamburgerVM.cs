@@ -20,5 +20,6 @@ namespace Burger.WEBUI.Areas.Admin.Models.VMs
         public List<Extra> Extras { get; set; }
 
         public List<HamburgerExtra> HamburgerExtras { get; set; }
+        
     }
 }

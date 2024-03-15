@@ -4,6 +4,7 @@ using Burger.REPO.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -40,6 +41,21 @@ namespace Burger.SERVICE.Services.ByProductService
         public async Task<ByProduct> GetByIdAsync(int id)
         {
             return await byProductREPO.GetByIdAsync(id);
+        }
+
+        public async Task<List<ByProduct>> GetWhereAsync(Expression<Func<ByProduct, bool>> expression)
+        {
+            return await byProductREPO.GetWhereAsync(expression);
+        }
+
+        public ByProduct JoinedGetWhereByMenuIdProductTypeFirst(int id, ByProductType type)
+        {
+            return byProductREPO.JoinedGetWhereByMenuIdProductType(id, type).FirstOrDefault();
+        }
+
+        public ByProduct JoinedGetWhereByMenuIdProductTypeLast(int id, ByProductType type)
+        {
+            return byProductREPO.JoinedGetWhereByMenuIdProductType(id, type).LastOrDefault();
         }
 
         public int Update(ByProduct entity)

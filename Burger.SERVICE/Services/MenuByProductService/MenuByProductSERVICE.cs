@@ -3,6 +3,7 @@ using Burger.REPO.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,6 +28,11 @@ namespace Burger.SERVICE.Services.MenuByProductService
             return _menuByProductREPO.Delete(entities);
         }
 
+        public Task<List<MenuByProduct>> GetAllAsync()
+        {
+            return _menuByProductREPO.GetAllAsync();
+        }
+
         public IEnumerable<MenuByProduct> GetByByProductId(int id)
         {
             return _menuByProductREPO.GetByByProductId(id);
@@ -37,9 +43,15 @@ namespace Burger.SERVICE.Services.MenuByProductService
             return _menuByProductREPO.GetByMenuId(id);
         }
 
+        public async Task<IEnumerable<MenuByProduct>> GetWhereByProduct(Expression<Func<MenuByProduct, bool>> expression)
+        {
+            return await _menuByProductREPO.GetWhereAsync(expression);
+        }
+
         public int Update(IEnumerable<MenuByProduct> entities)
         {
             return _menuByProductREPO.Update(entities);
         }
+
     }
 }

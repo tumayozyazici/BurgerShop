@@ -12,6 +12,8 @@ namespace Burger.SERVICE.Services.MenuHamburgerService
         int Create(IEnumerable<MenuHamburger> entities);
         int Update(IEnumerable<MenuHamburger> entities);
         int Delete(IEnumerable<MenuHamburger> entities);
+        Task<List<MenuHamburger>> GetAllAsync();
+
         IEnumerable<MenuHamburger> GetByMenuId(int menuId);
         IEnumerable<MenuHamburger> GetByBurgerId(int burgerId);
     }

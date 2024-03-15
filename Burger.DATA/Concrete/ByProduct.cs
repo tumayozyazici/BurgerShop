@@ -24,6 +24,6 @@ namespace Burger.DATA.Concrete
 
         //Nav
         public virtual ICollection<MenuByProduct> MenuByProducts { get; set; }
-        public virtual ICollection<OrderByProduct> OrderByProducts { get; set; }
+        public virtual ICollection<OrderByProduct>? OrderByProducts { get; set; }
     }
 }
