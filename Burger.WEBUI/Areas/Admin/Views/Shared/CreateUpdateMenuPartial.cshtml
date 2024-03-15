@@ -1,6 +1,7 @@
-﻿@using Burger.DATA.Concrete
-@model Burger.WEBUI.Areas.Admin.Models.VMs.CreateUpdateHamburgerVM
+﻿@model Burger.WEBUI.Areas.Admin.Models.VMs.CreateUpdateMenuVM
 
+<h4>CreateUpdateMenuVM</h4>
+<hr />
 <div class="container">
     <div class="row justify-content-end">
         <div class="col-10">
@@ -26,38 +27,13 @@
                     <input asp-for="Description" class="form-control" />
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
-                @foreach (var item in Model.Extras)
-                {
-                    if (Model.HamburgerExtras != null)
-                    {
-                        if (Model.HamburgerExtras.Any(x => x.ExtraId == item.Id))
-                        {
-                            <input type="checkbox" value="@item.Id" name="selectedIds" checked> @item.Name <br />
-                        }
-                        else
-                        {
-
-                            <input type="checkbox" value="@item.Id" name="selectedIds"> @item.Name <br />
-                        }
-                        
-                    }
-                    else
-                    {
-
-                        <input type="checkbox" value="@item.Id" name="selectedIds"> @item.Name <br />
-                    }
-                    
-                }
-
-
                 <div class="form-group mt-2">
-                    <input type="submit" value="@ViewBag.baslik" class="btn btn-primary" />
+                    <input type="submit" value="@ViewBag.Title" class="btn btn-primary" />
                 </div>
             </form>
         </div>
     </div>
 </div>
-
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

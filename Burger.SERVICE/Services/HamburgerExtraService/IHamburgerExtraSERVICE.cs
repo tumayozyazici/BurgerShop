@@ -14,5 +14,7 @@ namespace Burger.SERVICE.Services.HamburgerExtraService
         int Delete(IEnumerable<HamburgerExtra> entities);
 
         IEnumerable<HamburgerExtra> GetByBurgerId(int id);
+
+        Task<List<HamburgerExtra>> GetAllAsync();
     }
 }

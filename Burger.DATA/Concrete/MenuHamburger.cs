@@ -14,7 +14,5 @@ namespace Burger.DATA.Concrete
 
         public int HamburgerId { get; set; }
         public virtual Hamburger Hamburger { get; set; }
-
-
     }
 }

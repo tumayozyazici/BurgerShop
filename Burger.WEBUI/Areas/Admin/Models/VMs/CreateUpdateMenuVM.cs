@@ -1,12 +1,11 @@
-﻿using Burger.DATA.Concrete;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace Burger.WEBUI.Areas.Admin.Models.VMs
 {
-    public class CreateUpdateHamburgerVM
+    public class CreateUpdateMenuVM
     {
         public int Id { get; set; }
-        [DisplayName("Burger Adı")]
+        [DisplayName("Menü Adı")]
         public string Name { get; set; }
 
         [DisplayName("Fiyatı")]
@@ -16,9 +15,5 @@ namespace Burger.WEBUI.Areas.Admin.Models.VMs
 
         [DisplayName("Açıklama")]
         public string? Description { get; set; }
-
-        public List<Extra> Extras { get; set; }
-
-        public List<HamburgerExtra> HamburgerExtras { get; set; }
     }
 }
