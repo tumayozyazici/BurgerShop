@@ -12,6 +12,7 @@
                 <thead>
                     <tr>
                         <th scope="col">@ViewBag.baslik Adı</th>
+                        <th scope="col">@ViewBag.baslik Resmi</th>
                         <th scope="col">Açıklama</th>
                         <th scope="col">Fiyat</th>
                         @* <th scope="col">Price</th> *@
@@ -26,6 +27,7 @@
                         {
                             <tr>
                                 <th scope="row">@item.Name</th>
+                                <td><img src="@item.Photo" style="width:100px; height:100px; object-fit:cover;"/></td>
                                 <td>@item.Description</td>
                                 <td>@item.Price ₺</td>
                                 <td>@item.Status</td>

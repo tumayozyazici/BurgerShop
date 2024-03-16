@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-end">
         <div class="col-10">
-            <form asp-action="@ViewBag.Title">
+            <form asp-action="@ViewBag.Title" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Name" class="control-label"></label>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Photo" class="control-label"></label>
-                    <input asp-for="Photo" class="form-control" />
+                    <input asp-for="Photo" type="file" name="file" class="form-control-file" />
                     <span asp-validation-for="Photo" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -39,14 +39,14 @@
 
                             <input type="checkbox" value="@item.Id" name="selectedIds"> @item.Name <br />
                         }
-                        
+
                     }
                     else
                     {
 
                         <input type="checkbox" value="@item.Id" name="selectedIds"> @item.Name <br />
                     }
-                    
+
                 }
 
 

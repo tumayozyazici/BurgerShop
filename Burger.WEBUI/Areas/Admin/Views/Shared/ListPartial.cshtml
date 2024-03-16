@@ -2,8 +2,6 @@
 @using Burger.WEBUI.Areas.Admin.Models.VMs
 @model ListHamburgerVM
 
-
-
 <div class="container">
     <div class="row justify-content-end">
         <div class="col-10">
@@ -11,6 +9,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Burger Adı</th>
+                        <th scope="col">Burger Resmi</th>
                         <th scope="col">Açıklama</th>
                         <th scope="col">Fiyat</th>
                         <th scope="col">Status</th>
@@ -23,19 +22,16 @@
                     {
                         <tr>
                             <th scope="row">@item.Name</th>
+                            <td><img src="@item.Photo" style="width:100px; height:100px; object-fit:cover;"></img></td>
                             <td>@item.Description</td>
                             <td>@item.Price ₺</td>
                             <td>@item.Status</td>
                             <td>
-                                @if (Model.HamburgerExtras.Any(x=>x.HamburgerId==item.Id))
+                                @if (Model.HamburgerExtras.Any(x => x.HamburgerId == item.Id))
                                 {
                                     foreach (var extras in Model.HamburgerExtras.Where(x => x.HamburgerId == item.Id))
                                     {
-                                        <ul>
-                                            @extras.Extra.Name
-                                        </ul>
-                                        
-                                        
+                                        <i>@extras.Extra.Name</i>
                                     }
                                 }
                             </td>

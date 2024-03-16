@@ -151,6 +151,9 @@ namespace Burger.REPO.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Photo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
@@ -456,6 +459,41 @@ namespace Burger.REPO.Migrations
                     b.ToTable("OrderByProducts");
                 });
 
+            modelBuilder.Entity("Burger.DATA.Concrete.OrderExtra", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeleteDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ExtraId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExtraId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderExtras");
+                });
+
             modelBuilder.Entity("Burger.DATA.Concrete.OrderHamburger", b =>
                 {
                     b.Property<int>("Id")
@@ -679,7 +717,7 @@ namespace Burger.REPO.Migrations
                         .IsRequired();
 
                     b.HasOne("Burger.DATA.Concrete.Menu", "Menu")
-                        .WithMany()
+                        .WithMany("MenuHamburgers")
                         .HasForeignKey("MenuId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -715,6 +753,25 @@ namespace Burger.REPO.Migrations
                         .IsRequired();
 
                     b.Navigation("ByProduct");
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("Burger.DATA.Concrete.OrderExtra", b =>
+                {
+                    b.HasOne("Burger.DATA.Concrete.Extra", "Extra")
+                        .WithMany("OrderExtras")
+                        .HasForeignKey("ExtraId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Burger.DATA.Concrete.Order", "Order")
+                        .WithMany("OrderExtras")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Extra");
 
                     b.Navigation("Order");
                 });
@@ -823,6 +880,8 @@ namespace Burger.REPO.Migrations
             modelBuilder.Entity("Burger.DATA.Concrete.Extra", b =>
                 {
                     b.Navigation("HamburgerExtras");
+
+                    b.Navigation("OrderExtras");
                 });
 
             modelBuilder.Entity("Burger.DATA.Concrete.Hamburger", b =>
@@ -838,12 +897,16 @@ namespace Burger.REPO.Migrations
                 {
                     b.Navigation("MenuByProducts");
 
+                    b.Navigation("MenuHamburgers");
+
                     b.Navigation("OrderMenus");
                 });
 
             modelBuilder.Entity("Burger.DATA.Concrete.Order", b =>
                 {
                     b.Navigation("OrderByProducts");
+
+                    b.Navigation("OrderExtras");
 
                     b.Navigation("OrderHamburgers");
 

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Burger.REPO.Migrations
 {
-    public partial class db : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -59,6 +59,7 @@ namespace Burger.REPO.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
+                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Size = table.Column<int>(type: "int", nullable: false),
                     ByProductType = table.Column<int>(type: "int", nullable: false),
@@ -80,6 +81,7 @@ namespace Burger.REPO.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -382,6 +384,36 @@ namespace Burger.REPO.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "OrderExtras",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    ExtraId = table.Column<int>(type: "int", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderExtras", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderExtras_Extras_ExtraId",
+                        column: x => x.ExtraId,
+                        principalTable: "Extras",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderExtras_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OrderHamburgers",
                 columns: table => new
                 {
@@ -521,6 +553,16 @@ namespace Burger.REPO.Migrations
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_OrderExtras_ExtraId",
+                table: "OrderExtras",
+                column: "ExtraId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderExtras_OrderId",
+                table: "OrderExtras",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_OrderHamburgers_HamburgerId",
                 table: "OrderHamburgers",
                 column: "HamburgerId");
@@ -576,6 +618,9 @@ namespace Burger.REPO.Migrations
                 name: "OrderByProducts");
 
             migrationBuilder.DropTable(
+                name: "OrderExtras");
+
+            migrationBuilder.DropTable(
                 name: "OrderHamburgers");
 
             migrationBuilder.DropTable(
@@ -585,10 +630,10 @@ namespace Burger.REPO.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Extras");
+                name: "ByProducts");
 
             migrationBuilder.DropTable(
-                name: "ByProducts");
+                name: "Extras");
 
             migrationBuilder.DropTable(
                 name: "Hamburger");

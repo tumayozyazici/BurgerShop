@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="HelperClass\" />
+    <Folder Include="wwwroot\burgerImages\" />
   </ItemGroup>
 
   <ItemGroup>

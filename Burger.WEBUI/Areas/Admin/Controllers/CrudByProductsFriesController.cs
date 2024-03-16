@@ -13,10 +13,11 @@ namespace Burger.WEBUI.Areas.Admin.Controllers
     {
 
         private readonly IByProductSERVICE byProductSERVICE;
-
-        public CrudByProductsFriesController(IByProductSERVICE byProductService)
+        private readonly IWebHostEnvironment webHostEnvironment;
+        public CrudByProductsFriesController(IByProductSERVICE byProductService, IWebHostEnvironment webHostEnvironment)
         {
             this.byProductSERVICE = byProductService;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
         public async Task<IActionResult> Index()
@@ -40,10 +41,13 @@ namespace Burger.WEBUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CreateUpdateByProductVM vm)
+        public IActionResult Create(CreateUpdateByProductVM vm, IFormFile file)
         {
-            ByProduct byProduct = new ByProduct() { Name = vm.Name, Price = vm.Price, Description = vm.Description };
-            byProduct.ByProductType = ByProductType.Fries;
+            ByProduct byProduct = new ByProduct() { Name = vm.Name, Price = vm.Price, Description = vm.Description, ByProductType = ByProductType.Fries };
+            if (file != null && file.Length>0)
+            {
+                byProduct.Photo = HelperClass.Helper.AddPhoto(file, webHostEnvironment);
+            }
             byProductSERVICE.Add(byProduct);
             return RedirectToAction("Index", "CrudByProductsFries");
         }
@@ -58,15 +62,18 @@ namespace Burger.WEBUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(CreateUpdateByProductVM vm)
+        public async Task<IActionResult> Update(CreateUpdateByProductVM vm, IFormFile file)
         {
             ByProduct byProduct = await byProductSERVICE.GetByIdAsync(vm.Id);
             byProduct.Name = vm.Name;
             byProduct.Price = vm.Price;
             byProduct.Description = vm.Description;
+            if (file != null && file.Length > 0)
+            {
+                byProduct.Photo = HelperClass.Helper.AddPhoto(file, webHostEnvironment);
+            }
             byProductSERVICE.Update(byProduct);
             return RedirectToAction("Index", "CrudByProductsFries");
-
         }
         [HttpGet]
         public async Task<IActionResult> Delete(int id)

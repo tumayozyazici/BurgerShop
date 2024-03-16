@@ -744,8 +744,7 @@ section {
 }
 
 /*--------------------------------------------------------------
-# About
---------------------------------------------------------------*/
+# About-----------------------------------------------------------*/
 .about {
     /*  background: url("../img/about-bg.jpg") center center;
 */ background-size: cover;
@@ -769,6 +768,8 @@ position: absolute;
 .about .about-img {
   position: relative;
   transition: 0.5s;
+  width: 100px;
+  height: auto;
 }
 
 .about .about-img img {
