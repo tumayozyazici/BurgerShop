@@ -243,8 +243,9 @@
                                 <div class="menu-content">
                                     <a href="#">@item.Name</a><span>$@item.Price</span>
                                 </div>
-                                <div class="menu-ingredients">
+                                <div class="menu-ingredients d-flex">
                                     @item.Description
+                                    <a type="submit" asp-controller="ShoppingCart" asp-action="Index" asp-route-id="@item.Id">Sepete Ekle</a>
                                 </div>
                             </div>
                         }

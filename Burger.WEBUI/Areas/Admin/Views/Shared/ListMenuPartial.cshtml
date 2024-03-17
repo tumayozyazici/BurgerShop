@@ -2,7 +2,6 @@
 @using Burger.WEBUI.Areas.Admin.Models.VMs
 @model ListMenuVM
 
-
 <div class="container">
     <div class="row justify-content-end">
         <div class="col-10">
@@ -10,6 +9,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Menü Adı</th>
+                        <th scope="col">@ViewBag.baslik Resmi</th>
                         <th scope="col">Açıklama</th>
                         <th scope="col">Fiyat</th>
                         <th scope="col">Status</th>
@@ -18,38 +18,42 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (Menu item in Model.Menus)
+                    @if (Model.Hamburgers != null)
                     {
-                        <tr>
-                            <th scope="row">@item.Name</th>
-                            <td>@item.Description</td>
-                            <td>@item.Price ₺</td>
-                            <td>@item.Status</td>
-                            <td>
-                                @if (Model.MenuHamburgers.Any(x=>x.MenuId == item.Id))
-                                {
-                                    <ul>
-                                        @foreach (var burger in Model.MenuHamburgers.Where(x=>x.MenuId==item.Id))
-                                        {
-                                            @burger.Hamburger.Name
-                                        }
-                                    </ul>
-                                }
-                                @if (Model.MenuByProducts.Any(x=>x.MenuId == item.Id))
-                                {
-                                    foreach (var byProduct in Model.MenuByProducts.Where(x=>x.MenuId == item.Id))
+                        @foreach (Menu item in Model.Menus)
+                        {
+                            <tr>
+                                <th scope="row">@item.Name</th>
+                                <td><img src="@item.Photo" style="width:100px; height:100px; object-fit:cover;" /></td>
+                                <td>@item.Description</td>
+                                <td>@item.Price ₺</td>
+                                <td>@item.Status</td>
+                                <td>
+                                    @if (Model.MenuHamburgers.Any(x => x.MenuId == item.Id))
                                     {
                                         <ul>
-                                            @byProduct.ByProduct.Name
+                                            @foreach (var burger in Model.MenuHamburgers.Where(x => x.MenuId == item.Id))
+                                            {
+                                                @burger.Hamburger.Name
+                                            }
                                         </ul>
                                     }
-                                }
-                            </td>
-                            <td>
-                                <a class="btn btn-success" asp-route-id=@item.Id asp-controller="CrudMenu" asp-action="Update">Güncelle</a>
-                                <a class="btn btn-danger" asp-route-id=@item.Id asp-controller="CrudMenu" asp-action="Delete">Sil</a>
-                            </td>
-                        </tr>
+                                    @if (Model.MenuByProducts.Any(x => x.MenuId == item.Id))
+                                    {
+                                        foreach (var byProduct in Model.MenuByProducts.Where(x => x.MenuId == item.Id))
+                                        {
+                                            <ul>
+                                                @byProduct.ByProduct.Name
+                                            </ul>
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    <a class="btn btn-success" asp-route-id=@item.Id asp-controller="CrudMenu" asp-action="Update">Güncelle</a>
+                                    <a class="btn btn-danger" asp-route-id=@item.Id asp-controller="CrudMenu" asp-action="Delete">Sil</a>
+                                </td>
+                            </tr>
+                        }
                     }
                 </tbody>
             </table>

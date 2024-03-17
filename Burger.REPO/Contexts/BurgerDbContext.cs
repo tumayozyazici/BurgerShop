@@ -26,6 +26,7 @@ namespace Burger.REPO.Contexts
         public DbSet<OrderByProduct> OrderByProducts { get; set; }
         public DbSet<OrderMenu> OrderMenus { get; set; }
         public DbSet<OrderExtra> OrderExtras { get; set; }
+        public DbSet<Cart> Carts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

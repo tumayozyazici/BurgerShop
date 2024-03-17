@@ -22,14 +22,16 @@ namespace Burger.WEBUI.Areas.Admin.Controllers
         private readonly IByProductSERVICE byProductService;
         private readonly IMenuByProductSERVICE menuByProductService;
         private readonly IMenuHamburgerSERVICE menuHamburgerSERVICE;
+        private readonly IWebHostEnvironment webHostEnvironment;
 
-        public CrudMenuController(IMenuSERVICE menuSERVICE, IHamburgerSERVICE hamburgerSERVICE, IByProductSERVICE byProductService, IMenuByProductSERVICE menuByProductService, IMenuHamburgerSERVICE menuHamburgerSERVICE)
+        public CrudMenuController(IMenuSERVICE menuSERVICE, IHamburgerSERVICE hamburgerSERVICE, IByProductSERVICE byProductService, IMenuByProductSERVICE menuByProductService, IMenuHamburgerSERVICE menuHamburgerSERVICE, IWebHostEnvironment webHostEnvironment)
         {
             this.menuSERVICE = menuSERVICE;
             this.hamburgerSERVICE = hamburgerSERVICE;
             this.byProductService = byProductService;
             this.menuByProductService = menuByProductService;
             this.menuHamburgerSERVICE = menuHamburgerSERVICE;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
         public async Task<IActionResult> Index()
@@ -45,8 +47,7 @@ namespace Burger.WEBUI.Areas.Admin.Controllers
             vm.MenuHamburgers = menuBurger;
             vm.ByProducts = byProduct;
             vm.Hamburgers = burger;
-
-
+            ViewBag.baslik = "Menu";
 
             return View(vm);
         }
@@ -72,9 +73,14 @@ namespace Burger.WEBUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CreateUpdateMenuVM vm, int selectedHamburger, int selectedDrink, int selectedFry, int selectedSauce1, int selectedSauce2)
+        public IActionResult Create(CreateUpdateMenuVM vm, int selectedHamburger, int selectedDrink, int selectedFry, int selectedSauce1, int selectedSauce2, IFormFile file)
         {
             Menu menu = new Menu() { Name = vm.Name, Price = vm.Price, Description = vm.Description };
+            if (file != null && file.Length > 0)
+            {
+                menu.Photo = HelperClass.Helper.AddPhoto(file, webHostEnvironment);
+            }
+
             menuSERVICE.Add(menu);
 
             menu.MenuHamburgers = new List<MenuHamburger>();
@@ -124,12 +130,18 @@ namespace Burger.WEBUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(CreateUpdateMenuVM vm, int selectedHamburger, int selectedDrink, int selectedFry, int selectedSauce1, int selectedSauce2)
+        public async Task<IActionResult> Update(CreateUpdateMenuVM vm, int selectedHamburger, int selectedDrink, int selectedFry, int selectedSauce1, int selectedSauce2, IFormFile file)
         {
             Menu menu = await menuSERVICE.GetByIdAsync(vm.Id);
             menu.Name = vm.Name;
             menu.Price = vm.Price;
             menu.Description = vm.Description;
+
+            if (file != null && file.Length > 0)
+            {
+                menu.Photo = HelperClass.Helper.AddPhoto(file, webHostEnvironment);
+            }
+
             menuSERVICE.Update(menu);
 
             var burger = menuHamburgerSERVICE.GetByMenuId(vm.Id);
