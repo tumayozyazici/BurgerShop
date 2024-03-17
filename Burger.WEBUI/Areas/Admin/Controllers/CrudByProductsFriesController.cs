@@ -37,6 +37,7 @@ namespace Burger.WEBUI.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewBag.Title = "Create";
+            ViewBag.baslik = "Ekle";
             return View();
         }
 
@@ -58,6 +59,7 @@ namespace Burger.WEBUI.Areas.Admin.Controllers
             var result = await byProductSERVICE.GetByIdAsync(id);
             CreateUpdateByProductVM vm = new CreateUpdateByProductVM() { Id = id, Name = result.Name, Description = result.Description, Price = result.Price };
             ViewBag.Title = "Update";
+            ViewBag.baslik = "Güncelle";
             return View(vm);
         }
 

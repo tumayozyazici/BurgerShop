@@ -1,1 +1,13 @@
-﻿
+﻿<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="text-center">
+        @await Component.InvokeAsync("ShoppingCart")
+    </div>
+}
