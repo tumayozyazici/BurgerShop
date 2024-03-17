@@ -1,4 +1,10 @@
 ﻿using Burger.DATA.Concrete;
+using Burger.REPO.Interface;
+using Burger.SERVICE.Services.ByProductService;
+using Burger.SERVICE.Services.ExtraService;
+using Burger.SERVICE.Services.HamburgerExtraService;
+using Burger.SERVICE.Services.HamburgerService;
+using Burger.SERVICE.Services.MenuService;
 using Burger.WEBUI.Models;
 using Burger.WEBUI.Models.VMs;
 using Microsoft.AspNetCore.Identity;
@@ -11,67 +17,75 @@ namespace Burger.WEBUI.Controllers
 {
     public class HomeController : Controller
     {
+        public static CreateUserVm _user;
         private readonly ILogger<HomeController> _logger;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
-        public HomeController(ILogger<HomeController> logger, SignInManager<AppUser> signInManager, UserManager<AppUser> userManager)
+        private readonly IHamburgerSERVICE _hamburgerService;
+        private readonly IByProductSERVICE _byProductService;
+        private readonly IExtraSERVICE _extraService;
+        private readonly IMenuSERVICE _menuService;
+
+        public HomeController(ILogger<HomeController> logger, SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IHamburgerSERVICE hamburgerService, IByProductSERVICE byProductService, IExtraSERVICE extraService, IMenuSERVICE menuService)
         {
             _logger = logger;
             _signInManager = signInManager;
             _userManager = userManager;
+            _hamburgerService = hamburgerService;
+            _byProductService = byProductService;
+            _extraService = extraService;
+            _menuService = menuService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            ListProductsVM vm = new ListProductsVM();
+            var burger = await _hamburgerService.GetAllAsync();
+            var byProducts = await _byProductService.GetAllAsync();
+            var extras = await _extraService.GetAllAsync();
+            var menus = await _menuService.GetAllAsync();
+            vm.Menus = menus;
+            vm.ByProducts = byProducts;
+            vm.Hamburgers = burger;
+            vm.Extras = extras;
+            return View(vm);
         }
 
         [HttpGet]
-        public IActionResult Register()
+        public async Task<IActionResult> Register()
         {
             return View();
         }
-        public static CreateUserVm _user;
+
         [HttpPost]
         public async Task<IActionResult> Register(CreateUserVm vm)
         {
-            var user = await _userManager.FindByEmailAsync(vm.Email);
-
-            if (user == null)
+            if (ModelState.IsValid)
             {
-                
-                Random rnd = new Random();
-                int confirmationCode = rnd.Next(10000, 99999);
+                var user = await _userManager.FindByEmailAsync(vm.Email);
 
-                MailMessage mail = new MailMessage();
-                mail.From = new MailAddress("burgershop12@outlook.com", "BurgerShop");
-                mail.To.Add(vm.Email);
-                mail.Subject = "BurgerShop Doğrulama Kodu";
-                mail.IsBodyHtml = true;
-                mail.Body = "BurgerShop'a hoşgeldiniz. İşte doğrulama kodun: " + confirmationCode;
+                if (user == null)
+                {
+                    Random rnd = new Random();
+                    int confirmationCode = rnd.Next(10000, 99999);
 
-                SmtpClient smtpClient = new SmtpClient();
-                smtpClient.Port = 587;
-                smtpClient.Host = "smtp.outlook.com";
-                smtpClient.EnableSsl = true;
-                smtpClient.Credentials = new NetworkCredential("burgershop12@outlook.com", "Admin..1234");
+                    HelperClass.Helper.SendMail(user, vm, confirmationCode);
 
-                smtpClient.Send(mail);
-                smtpClient.Timeout = 100;
-
-                _user = vm;
-                TempData["confirmationCode"] = confirmationCode;
-                return RedirectToAction("Confirmation", "Home");
+                    _user = vm;
+                    TempData["confirmationCode"] = confirmationCode;
+                    return RedirectToAction("Confirmation", "Home");
+                }
+                else
+                {
+                    ViewBag.rejection = "Bu E-mail'de bir kullanıcı mevcut.";
+                    return View(vm);
+                }
             }
-            else
-            {
-                ViewBag.rejection = "Bu E-mail'de bir kullanıcı mevcut.";
-                return View(vm);
-            }
+            return View(vm);
         }
-        
+
         [HttpGet]
-        public IActionResult Confirmation()
+        public async Task<IActionResult> Confirmation()
         {
             return View();
         }
@@ -98,7 +112,7 @@ namespace Burger.WEBUI.Controllers
 
 
         [HttpGet]
-        public IActionResult Login()
+        public async Task<IActionResult> Login()
         {
             return View();
         }
@@ -118,28 +132,12 @@ namespace Burger.WEBUI.Controllers
             return View(vm);
         }
 
-
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         public IActionResult Privacy()
         {

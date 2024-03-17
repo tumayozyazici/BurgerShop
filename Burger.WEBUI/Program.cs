@@ -62,8 +62,10 @@ namespace Burger.WEBUI
                     policy.RequireRole("admin"));
             });
 
-            //IDENTITY  
-            builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<BurgerDbContext>().AddDefaultTokenProviders();
+            //IDENTITY 
+            builder.Services.AddIdentity<AppUser, AppRole>()
+                .AddEntityFrameworkStores<BurgerDbContext>()
+                .AddDefaultTokenProviders();
 
             var app = builder.Build();
 

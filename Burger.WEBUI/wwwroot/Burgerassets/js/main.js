@@ -265,6 +265,10 @@
     selector: '.gallery-lightbox'
   });
 
+  
+
+
+
   /**
    * Animation on scroll
    */
