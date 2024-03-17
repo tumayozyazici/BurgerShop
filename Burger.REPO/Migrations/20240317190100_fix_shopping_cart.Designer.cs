@@ -4,6 +4,7 @@ using Burger.REPO.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Burger.REPO.Migrations
 {
     [DbContext(typeof(BurgerDbContext))]
-    partial class BurgerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240317190100_fix_shopping_cart")]
+    partial class fix_shopping_cart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,7 +175,7 @@ namespace Burger.REPO.Migrations
 
                     b.HasIndex("CartId");
 
-                    b.ToTable("ByProducts", (string)null);
+                    b.ToTable("ByProducts");
                 });
 
             modelBuilder.Entity("Burger.DATA.Concrete.Cart", b =>
@@ -198,7 +200,7 @@ namespace Burger.REPO.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Carts", (string)null);
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("Burger.DATA.Concrete.Extra", b =>
@@ -238,7 +240,7 @@ namespace Burger.REPO.Migrations
 
                     b.HasIndex("CartId");
 
-                    b.ToTable("Extras", (string)null);
+                    b.ToTable("Extras");
                 });
 
             modelBuilder.Entity("Burger.DATA.Concrete.Hamburger", b =>
@@ -281,7 +283,7 @@ namespace Burger.REPO.Migrations
 
                     b.HasIndex("CartId");
 
-                    b.ToTable("Hamburger", (string)null);
+                    b.ToTable("Hamburger");
                 });
 
             modelBuilder.Entity("Burger.DATA.Concrete.HamburgerExtra", b =>
@@ -316,7 +318,7 @@ namespace Burger.REPO.Migrations
 
                     b.HasIndex("HamburgerId");
 
-                    b.ToTable("HamburgerExtras", (string)null);
+                    b.ToTable("HamburgerExtras");
                 });
 
             modelBuilder.Entity("Burger.DATA.Concrete.Menu", b =>
@@ -359,7 +361,7 @@ namespace Burger.REPO.Migrations
 
                     b.HasIndex("CartId");
 
-                    b.ToTable("Menus", (string)null);
+                    b.ToTable("Menus");
                 });
 
             modelBuilder.Entity("Burger.DATA.Concrete.MenuByProduct", b =>
@@ -394,7 +396,7 @@ namespace Burger.REPO.Migrations
 
                     b.HasIndex("MenuId");
 
-                    b.ToTable("MenuByProducts", (string)null);
+                    b.ToTable("MenuByProducts");
                 });
 
             modelBuilder.Entity("Burger.DATA.Concrete.MenuHamburger", b =>
@@ -429,7 +431,7 @@ namespace Burger.REPO.Migrations
 
                     b.HasIndex("MenuId");
 
-                    b.ToTable("MenuHamburgers", (string)null);
+                    b.ToTable("MenuHamburgers");
                 });
 
             modelBuilder.Entity("Burger.DATA.Concrete.Order", b =>
@@ -466,7 +468,7 @@ namespace Burger.REPO.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Burger.DATA.Concrete.OrderByProduct", b =>
@@ -501,7 +503,7 @@ namespace Burger.REPO.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderByProducts", (string)null);
+                    b.ToTable("OrderByProducts");
                 });
 
             modelBuilder.Entity("Burger.DATA.Concrete.OrderExtra", b =>
@@ -536,7 +538,7 @@ namespace Burger.REPO.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderExtras", (string)null);
+                    b.ToTable("OrderExtras");
                 });
 
             modelBuilder.Entity("Burger.DATA.Concrete.OrderHamburger", b =>
@@ -571,7 +573,7 @@ namespace Burger.REPO.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderHamburgers", (string)null);
+                    b.ToTable("OrderHamburgers");
                 });
 
             modelBuilder.Entity("Burger.DATA.Concrete.OrderMenu", b =>
@@ -606,7 +608,7 @@ namespace Burger.REPO.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderMenus", (string)null);
+                    b.ToTable("OrderMenus");
                 });
 
             modelBuilder.Entity("Burger.DATA.Concrete.ShoppingCart", b =>
@@ -637,7 +639,7 @@ namespace Burger.REPO.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ShoppingCarts", (string)null);
+                    b.ToTable("ShoppingCarts");
                 });
 
             modelBuilder.Entity("Burger.DATA.Concrete.ShoppingCartByProduct", b =>
@@ -675,7 +677,7 @@ namespace Burger.REPO.Migrations
 
                     b.HasIndex("ShoppingCartId");
 
-                    b.ToTable("ShoppingCartByProducts", (string)null);
+                    b.ToTable("ShoppingCartByProducts");
                 });
 
             modelBuilder.Entity("Burger.DATA.Concrete.ShoppingCartExtra", b =>
@@ -713,7 +715,7 @@ namespace Burger.REPO.Migrations
 
                     b.HasIndex("ShoppingCartId");
 
-                    b.ToTable("ShoppingCartExtras", (string)null);
+                    b.ToTable("ShoppingCartExtras");
                 });
 
             modelBuilder.Entity("Burger.DATA.Concrete.ShoppingCartHamburger", b =>
@@ -751,7 +753,7 @@ namespace Burger.REPO.Migrations
 
                     b.HasIndex("ShoppingCartId");
 
-                    b.ToTable("ShoppingCartHamburgers", (string)null);
+                    b.ToTable("ShoppingCartHamburgers");
                 });
 
             modelBuilder.Entity("Burger.DATA.Concrete.ShoppingCartMenu", b =>
@@ -789,7 +791,7 @@ namespace Burger.REPO.Migrations
 
                     b.HasIndex("ShoppingCartId");
 
-                    b.ToTable("ShoppingCartMenus", (string)null);
+                    b.ToTable("ShoppingCartMenus");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

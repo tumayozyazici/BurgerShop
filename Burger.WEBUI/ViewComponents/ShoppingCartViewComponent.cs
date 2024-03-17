@@ -1,4 +1,5 @@
 ﻿using Burger.DATA.Concrete;
+using Burger.SERVICE.Services.ShoppingCartService;
 using Burger.WEBUI.Models;
 using Burger.WEBUI.Models.VMs;
 using Microsoft.AspNetCore.Mvc;
@@ -7,41 +8,30 @@ namespace Burger.WEBUI.ViewComponents
 {
     public class ShoppingCartViewComponent : ViewComponent
     {
+        private readonly IShoppingCartSERVICE _shoppingCartSERVICE;
+
+        public ShoppingCartViewComponent(IShoppingCartSERVICE shoppingCartSERVICE)
+        {
+            _shoppingCartSERVICE = shoppingCartSERVICE;
+        }
+
         public IViewComponentResult Invoke()
         {
-            var cartItems = new List<CartItem>();
+            var currentUserShoppingCart = _shoppingCartSERVICE.GetCurrentUserShoppingcart().GetAwaiter().GetResult();
+            var model = new ShoppingCartVM
+            {
+                TotalPrice = currentUserShoppingCart.TotalPrice,
+                CartItems = new List<CartItem>()
+            };
 
-            //CartItems Bir şekilde dolacak burada!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1111
+            model.CartItems.AddRange(currentUserShoppingCart.Menus.Select(menu => new CartItem() { Name = menu.Menu.Name, Quantity = menu.Quantity,Photo = menu.Menu.Photo }));
+            model.CartItems.AddRange(currentUserShoppingCart.Hamburgers.Select(burgers => new CartItem() { Name = burgers.Hamburger.Name, Quantity = burgers.Quantity , Photo = burgers.Hamburger.Photo }));
+            model.CartItems.AddRange(currentUserShoppingCart.Extras.Select(extra => new CartItem() { Name = extra.Extra.Name, Quantity = extra.Quantity }));
+            model.CartItems.AddRange(currentUserShoppingCart.ByProducts.Select(product => new CartItem() { Name = product.ByProduct.Name, Quantity = product.Quantity , Photo = product.ByProduct.Photo }));
 
 
-            var model = new ShoppingCartVM() { CartItems = cartItems, TotalPrice = CalculateTotalPrice(cartItems) };
 
             return View(model);
-        }
-        private double CalculateTotalPrice(List<CartItem> cartItems)
-        {
-            double totalPrice = 0;
-
-            foreach (var item in cartItems)
-            {
-                foreach (Menu menu in item.Menus)
-                {
-                    totalPrice += menu.Price;
-                }
-                foreach (Hamburger burger in item.Hamburgers)
-                {
-                    totalPrice += burger.Price;
-                }
-                foreach (ByProduct byProduct in item.ByProducts)
-                {
-                    totalPrice += byProduct.Price;
-                }
-                foreach (Extra extra in item.Extras)
-                {
-                    totalPrice += extra.Price;
-                }
-            }
-            return totalPrice;
         }
     }
 }

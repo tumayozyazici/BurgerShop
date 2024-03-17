@@ -1,16 +1,17 @@
 ﻿using Burger.DATA.Concrete;
 using Burger.SERVICE.Services.CartService;
 using Burger.SERVICE.Services.MenuService;
+using Burger.SERVICE.Services.ShoppingCartService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Burger.WEBUI.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        private readonly ICartSERVICE _cartService;
+        private readonly IShoppingCartSERVICE _cartService;
         private readonly IMenuSERVICE _menuService;
 
-        public ShoppingCartController(ICartSERVICE cartService, IMenuSERVICE menuService)
+        public ShoppingCartController(IShoppingCartSERVICE cartService, IMenuSERVICE menuService, IHttpContextAccessor httpContextAccessor)
         {
             _cartService = cartService;
             _menuService = menuService;
@@ -21,21 +22,40 @@ namespace Burger.WEBUI.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddToCart(int menuId)
+        [HttpGet]
+        public async Task<IActionResult> AddMenuToCart(int id, int quantity)
         {
-            Cart cart = new Cart();
-            Menu menu = await _menuService.GetByIdAsync(menuId);
+            var shoppingCart = await _cartService.AddMenu(id, quantity);
 
-            List<Menu> menuList = new List<Menu>();
-            menuList.Add(menu);
 
-            if (menu != null)
-            {
-                cart.Menus = menuList;
-            }
-            _cartService.Add(cart);
-            return RedirectToAction("Index", "ShoppingCart");
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddHamburgerToCart(int id, int quantity)
+        {
+            var shoppingCart = await _cartService.AddHamburger(id, quantity);
+
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddExtraToCart(int id, int quantity)
+        {
+            var shoppingCart = await _cartService.AddExtra(id, quantity);
+
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddByProductToCart(int id, int quantity)
+        {
+            var shoppingCart = await _cartService.AddByProduct(id, quantity);
+
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

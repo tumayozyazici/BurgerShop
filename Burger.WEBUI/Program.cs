@@ -13,6 +13,8 @@ using Burger.SERVICE.Services.OrderByProductService;
 using Burger.SERVICE.Services.OrderHamburgerService;
 using Burger.SERVICE.Services.OrderMenuService;
 using Burger.SERVICE.Services.OrderService;
+using Burger.SERVICE.Services.ShoppingCartService;
+using Burger.SERVICE.Services.ShoppingCartService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -42,6 +44,7 @@ namespace Burger.WEBUI
             builder.Services.AddScoped<IOrderHamburgerREPO, OrderHamburgerREPO>();
             builder.Services.AddScoped<IOrderMenuREPO, OrderMenuREPO>();
             builder.Services.AddScoped<IOrderREPO, OrderREPO>();
+            builder.Services.AddScoped<IShoppingCartREPO, ShoppingCartREPO>();
 
             // Service
             builder.Services.AddScoped<IByProductSERVICE, ByProductSERVICE>();
@@ -55,6 +58,7 @@ namespace Burger.WEBUI
             builder.Services.AddScoped<IOrderHamburgerSERVICE, OrderHamburgerSERVICE>();
             builder.Services.AddScoped<IOrderMenuSERVICE, OrderMenuSERVICE>();
             builder.Services.AddScoped<IOrderSERVICE, OrderSERVICE>();
+            builder.Services.AddScoped<IShoppingCartSERVICE, ShoppingCartSERVICE>();
 
             builder.Services.AddAuthorization(options =>
             {
