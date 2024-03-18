@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Burger.REPO.Migrations
 {
     [DbContext(typeof(BurgerDbContext))]
-    [Migration("20240317124508_cartAdded")]
-    partial class cartAdded
+    [Migration("20240318015913_db")]
+    partial class db
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -140,9 +140,6 @@ namespace Burger.REPO.Migrations
                     b.Property<int>("ByProductType")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CartId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
@@ -155,6 +152,9 @@ namespace Burger.REPO.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OrderType")
+                        .HasColumnType("int");
 
                     b.Property<string>("Photo")
                         .HasColumnType("nvarchar(max)");
@@ -173,34 +173,7 @@ namespace Burger.REPO.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CartId");
-
                     b.ToTable("ByProducts");
-                });
-
-            modelBuilder.Entity("Burger.DATA.Concrete.Cart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeleteDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("Burger.DATA.Concrete.Extra", b =>
@@ -210,9 +183,6 @@ namespace Burger.REPO.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("CartId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
@@ -226,6 +196,9 @@ namespace Burger.REPO.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OrderType")
+                        .HasColumnType("int");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
@@ -238,8 +211,6 @@ namespace Burger.REPO.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CartId");
-
                     b.ToTable("Extras");
                 });
 
@@ -250,9 +221,6 @@ namespace Burger.REPO.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("CartId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
@@ -266,6 +234,9 @@ namespace Burger.REPO.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OrderType")
+                        .HasColumnType("int");
 
                     b.Property<string>("Photo")
                         .HasColumnType("nvarchar(max)");
@@ -280,8 +251,6 @@ namespace Burger.REPO.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CartId");
 
                     b.ToTable("Hamburger");
                 });
@@ -329,9 +298,6 @@ namespace Burger.REPO.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("CartId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
@@ -344,6 +310,9 @@ namespace Burger.REPO.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OrderType")
+                        .HasColumnType("int");
 
                     b.Property<string>("Photo")
                         .HasColumnType("nvarchar(max)");
@@ -358,8 +327,6 @@ namespace Burger.REPO.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CartId");
 
                     b.ToTable("Menus");
                 });
@@ -461,8 +428,9 @@ namespace Burger.REPO.Migrations
                     b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -611,6 +579,189 @@ namespace Burger.REPO.Migrations
                     b.ToTable("OrderMenus");
                 });
 
+            modelBuilder.Entity("Burger.DATA.Concrete.ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeleteDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ShoppingCarts");
+                });
+
+            modelBuilder.Entity("Burger.DATA.Concrete.ShoppingCartByProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ByProductId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeleteDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShoppingCartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ByProductId");
+
+                    b.HasIndex("ShoppingCartId");
+
+                    b.ToTable("ShoppingCartByProducts");
+                });
+
+            modelBuilder.Entity("Burger.DATA.Concrete.ShoppingCartExtra", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeleteDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ExtraId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShoppingCartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExtraId");
+
+                    b.HasIndex("ShoppingCartId");
+
+                    b.ToTable("ShoppingCartExtras");
+                });
+
+            modelBuilder.Entity("Burger.DATA.Concrete.ShoppingCartHamburger", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeleteDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("HamburgerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShoppingCartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HamburgerId");
+
+                    b.HasIndex("ShoppingCartId");
+
+                    b.ToTable("ShoppingCartHamburgers");
+                });
+
+            modelBuilder.Entity("Burger.DATA.Concrete.ShoppingCartMenu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeleteDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MenuId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShoppingCartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MenuId");
+
+                    b.HasIndex("ShoppingCartId");
+
+                    b.ToTable("ShoppingCartMenus");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -717,27 +868,6 @@ namespace Burger.REPO.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Burger.DATA.Concrete.ByProduct", b =>
-                {
-                    b.HasOne("Burger.DATA.Concrete.Cart", null)
-                        .WithMany("ByProducts")
-                        .HasForeignKey("CartId");
-                });
-
-            modelBuilder.Entity("Burger.DATA.Concrete.Extra", b =>
-                {
-                    b.HasOne("Burger.DATA.Concrete.Cart", null)
-                        .WithMany("Extras")
-                        .HasForeignKey("CartId");
-                });
-
-            modelBuilder.Entity("Burger.DATA.Concrete.Hamburger", b =>
-                {
-                    b.HasOne("Burger.DATA.Concrete.Cart", null)
-                        .WithMany("Hamburgers")
-                        .HasForeignKey("CartId");
-                });
-
             modelBuilder.Entity("Burger.DATA.Concrete.HamburgerExtra", b =>
                 {
                     b.HasOne("Burger.DATA.Concrete.Extra", "Extra")
@@ -755,13 +885,6 @@ namespace Burger.REPO.Migrations
                     b.Navigation("Extra");
 
                     b.Navigation("Hamburger");
-                });
-
-            modelBuilder.Entity("Burger.DATA.Concrete.Menu", b =>
-                {
-                    b.HasOne("Burger.DATA.Concrete.Cart", null)
-                        .WithMany("Menus")
-                        .HasForeignKey("CartId");
                 });
 
             modelBuilder.Entity("Burger.DATA.Concrete.MenuByProduct", b =>
@@ -889,6 +1012,82 @@ namespace Burger.REPO.Migrations
                     b.Navigation("Order");
                 });
 
+            modelBuilder.Entity("Burger.DATA.Concrete.ShoppingCartByProduct", b =>
+                {
+                    b.HasOne("Burger.DATA.Concrete.ByProduct", "ByProduct")
+                        .WithMany()
+                        .HasForeignKey("ByProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Burger.DATA.Concrete.ShoppingCart", "ShoppingCart")
+                        .WithMany("ByProducts")
+                        .HasForeignKey("ShoppingCartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ByProduct");
+
+                    b.Navigation("ShoppingCart");
+                });
+
+            modelBuilder.Entity("Burger.DATA.Concrete.ShoppingCartExtra", b =>
+                {
+                    b.HasOne("Burger.DATA.Concrete.Extra", "Extra")
+                        .WithMany()
+                        .HasForeignKey("ExtraId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Burger.DATA.Concrete.ShoppingCart", "ShoppingCart")
+                        .WithMany("Extras")
+                        .HasForeignKey("ShoppingCartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Extra");
+
+                    b.Navigation("ShoppingCart");
+                });
+
+            modelBuilder.Entity("Burger.DATA.Concrete.ShoppingCartHamburger", b =>
+                {
+                    b.HasOne("Burger.DATA.Concrete.Hamburger", "Hamburger")
+                        .WithMany()
+                        .HasForeignKey("HamburgerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Burger.DATA.Concrete.ShoppingCart", "ShoppingCart")
+                        .WithMany("Hamburgers")
+                        .HasForeignKey("ShoppingCartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hamburger");
+
+                    b.Navigation("ShoppingCart");
+                });
+
+            modelBuilder.Entity("Burger.DATA.Concrete.ShoppingCartMenu", b =>
+                {
+                    b.HasOne("Burger.DATA.Concrete.Menu", "Menu")
+                        .WithMany("ShoppingCartMenus")
+                        .HasForeignKey("MenuId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Burger.DATA.Concrete.ShoppingCart", "ShoppingCart")
+                        .WithMany("Menus")
+                        .HasForeignKey("ShoppingCartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Menu");
+
+                    b.Navigation("ShoppingCart");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Burger.DATA.Concrete.AppRole", null)
@@ -952,17 +1151,6 @@ namespace Burger.REPO.Migrations
                     b.Navigation("OrderByProducts");
                 });
 
-            modelBuilder.Entity("Burger.DATA.Concrete.Cart", b =>
-                {
-                    b.Navigation("ByProducts");
-
-                    b.Navigation("Extras");
-
-                    b.Navigation("Hamburgers");
-
-                    b.Navigation("Menus");
-                });
-
             modelBuilder.Entity("Burger.DATA.Concrete.Extra", b =>
                 {
                     b.Navigation("HamburgerExtras");
@@ -986,6 +1174,8 @@ namespace Burger.REPO.Migrations
                     b.Navigation("MenuHamburgers");
 
                     b.Navigation("OrderMenus");
+
+                    b.Navigation("ShoppingCartMenus");
                 });
 
             modelBuilder.Entity("Burger.DATA.Concrete.Order", b =>
@@ -997,6 +1187,17 @@ namespace Burger.REPO.Migrations
                     b.Navigation("OrderHamburgers");
 
                     b.Navigation("OrderMenus");
+                });
+
+            modelBuilder.Entity("Burger.DATA.Concrete.ShoppingCart", b =>
+                {
+                    b.Navigation("ByProducts");
+
+                    b.Navigation("Extras");
+
+                    b.Navigation("Hamburgers");
+
+                    b.Navigation("Menus");
                 });
 #pragma warning restore 612, 618
         }

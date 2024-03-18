@@ -23,6 +23,8 @@ namespace Burger.DATA.Concrete
 
         public ByProductType ByProductType { get; set; }
 
+        public OrderItems OrderType { get; set; } = OrderItems.ByProduct;
+
 
         //Nav
         public virtual ICollection<MenuByProduct> MenuByProducts { get; set; }

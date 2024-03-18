@@ -2,17 +2,53 @@
 @{
     Layout = "";
 }
-<div class="shopping-cart">
-    <h2>Alışveriş Sepeti</h2>
-    <ul>
-        @foreach (CartItem item in Model.CartItems)
-        {
-            if(item.Photo is not null)
-            {
-                // fotonun html tagı buraya gelecek
-            }
-            <li>@item.Name - @item.Quantity</li>
-        }
-    </ul>
-    <p>Toplam Fiyat: @Model.TotalPrice</p>
-</div>
+<form method="post" asp-controller="Order" asp-action="Index">
+    <div class="container pb-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Sepet</h2>
+                <hr />
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Quantity</th>
+                            <th>ProductName</th>
+                            <th>Price</th>
+                            <th>SubTotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.CartItems.Count; i++)
+                        {
+                            <tr>
+                                <input type="hidden" asp-for="CartItems[i].Id" />
+                                <input type="hidden" asp-for="CartItems[i].Name" />
+                                <input type="hidden" asp-for="CartItems[i].Quantity" />
+                                <input type="hidden" asp-for="CartItems[i].Price" />
+                                <input type="hidden" asp-for="CartItems[i].Photo" />
+                                <td><img src="@Model.CartItems[i].Photo" width="50" /></td>
+                                <td>
+                                    @Model.CartItems[i].Quantity
+                                </td>
+                                <td>@Model.CartItems[i].Name</td>
+                                <td>@Model.CartItems[i].Price</td>
+                                <td>@(Model.CartItems[i].Price * Model.CartItems[i].Quantity)</td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4"></td>
+                            <td>
+                                <input type="hidden" asp-for="@Model.TotalPrice" />
+                                @Model.TotalPrice
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <button class="btn btn-success" type="submit">Siparişi Tamamla</button>
+            </div>
+        </div>
+    </div>
+</form>

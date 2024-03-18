@@ -26,7 +26,7 @@ namespace Burger.REPO.Contexts
         public DbSet<OrderByProduct> OrderByProducts { get; set; }
         public DbSet<OrderMenu> OrderMenus { get; set; }
         public DbSet<OrderExtra> OrderExtras { get; set; }
-        public DbSet<Cart> Carts { get; set; }
+        //public DbSet<Cart> Carts { get; set; }
 
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<ShoppingCartByProduct> ShoppingCartByProducts { get; set; }
@@ -36,7 +36,7 @@ namespace Burger.REPO.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=MELIH;Database=Rehber;Trusted_Connection=True;Trust Server Certificate=True;");
+            optionsBuilder.UseSqlServer("Server=GHOST2023\\SQLEXPRESS;Database=BurgerShop3;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

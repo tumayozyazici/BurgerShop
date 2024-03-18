@@ -198,5 +198,133 @@ namespace Burger.SERVICE.Services.ShoppingCartService
 
             shoppingCart.TotalPrice = totalPrice;
         }
+
+        public async Task<ShoppingCart> DeleteMenu(int menuId, int quantity)
+        {
+            var shoppingCart = await GetCurrentUserShoppingcart();
+
+            var menu = await _menuREPO.GetByIdAsync(menuId);
+            if (menu == null)
+            {
+                throw new Exception("Silmek istediğiniz menü bulunamadı...");
+            }
+
+            var currentCartMenu = shoppingCart.Menus.FirstOrDefault(menu => menu.MenuId == menuId);
+            if (currentCartMenu != null)
+            {
+                if (currentCartMenu.Quantity > quantity)
+                {
+                    currentCartMenu.Quantity -= quantity;
+                }
+                else
+                {
+                    shoppingCart.Menus.Remove(currentCartMenu);
+                }
+            }
+            else
+            {
+                throw new Exception("Silmek istediğiniz menü sepetinizde bulunmamaktadır...");
+            }
+
+            CalculateTotal(shoppingCart);
+            _shoppingCartREPO.Update(shoppingCart);
+            return shoppingCart;
+        }
+
+        public async Task<ShoppingCart> DeleteHamburger(int hamburgerId, int quantity)
+        {
+            var shoppingCart = await GetCurrentUserShoppingcart();
+
+            var menu = await _hamburgerREPO.GetByIdAsync(hamburgerId);
+            if (menu == null)
+            {
+                throw new Exception("Silmek istediğiniz menü bulunamadı...");
+            }
+
+            var currentCartMenu = shoppingCart.Hamburgers.FirstOrDefault(menu => menu.HamburgerId == hamburgerId);
+            if (currentCartMenu != null)
+            {
+                if (currentCartMenu.Quantity > quantity)
+                {
+                    currentCartMenu.Quantity -= quantity;
+                }
+                else
+                {
+                    shoppingCart.Hamburgers.Remove(currentCartMenu);
+                }
+            }
+            else
+            {
+                throw new Exception("Silmek istediğiniz menü sepetinizde bulunmamaktadır...");
+            }
+
+            CalculateTotal(shoppingCart);
+            _shoppingCartREPO.Update(shoppingCart);
+            return shoppingCart;
+        }
+
+        public async Task<ShoppingCart> DeleteExtra(int extraId, int quantity)
+        {
+            var shoppingCart = await GetCurrentUserShoppingcart();
+
+            var menu = await _extraREPO.GetByIdAsync(extraId);
+            if (menu == null)
+            {
+                throw new Exception("Silmek istediğiniz menü bulunamadı...");
+            }
+
+            var currentCartMenu = shoppingCart.Extras.FirstOrDefault(menu => menu.ExtraId == extraId);
+            if (currentCartMenu != null)
+            {
+                if (currentCartMenu.Quantity > quantity)
+                {
+                    currentCartMenu.Quantity -= quantity;
+                }
+                else
+                {
+                    shoppingCart.Extras.Remove(currentCartMenu);
+                }
+            }
+            else
+            {
+                throw new Exception("Silmek istediğiniz menü sepetinizde bulunmamaktadır...");
+            }
+
+            CalculateTotal(shoppingCart);
+            _shoppingCartREPO.Update(shoppingCart);
+            return shoppingCart;
+        }
+
+        public async Task<ShoppingCart> DeleteByProduct(int byProductId, int quantity)
+        {
+            var shoppingCart = await GetCurrentUserShoppingcart();
+
+            var menu = await _byProductREPO.GetByIdAsync(byProductId);
+            if (menu == null)
+            {
+                throw new Exception("Silmek istediğiniz menü bulunamadı...");
+            }
+
+            var currentCartMenu = shoppingCart.ByProducts.FirstOrDefault(menu => menu.ByProductId == byProductId);
+            if (currentCartMenu != null)
+            {
+                if (currentCartMenu.Quantity > quantity)
+                {
+                    currentCartMenu.Quantity -= quantity;
+                }
+                else
+                {
+                    shoppingCart.ByProducts.Remove(currentCartMenu);
+                }
+            }
+            else
+            {
+                throw new Exception("Silmek istediğiniz menü sepetinizde bulunmamaktadır...");
+            }
+
+            CalculateTotal(shoppingCart);
+            _shoppingCartREPO.Update(shoppingCart);
+            return shoppingCart;
+        }
     }
 }

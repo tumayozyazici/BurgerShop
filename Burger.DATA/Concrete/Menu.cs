@@ -1,4 +1,5 @@
-﻿using Burger.DATA.Interfaces;
+﻿using Burger.DATA.Enums;
+using Burger.DATA.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace Burger.DATA.Concrete
         public string? Photo { get; set; }
 
         public string? Description { get; set; }
+        public OrderItems OrderType { get; set; } = OrderItems.Menu;
 
 
         //Nav

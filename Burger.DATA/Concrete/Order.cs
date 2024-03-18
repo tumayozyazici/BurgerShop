@@ -14,8 +14,8 @@ namespace Burger.DATA.Concrete
 
         //Nav
 
-        public int UserId { get; set; }
-        public virtual AppUser AppUser { get; set; }
+        public string UserId { get; set; }
+        public virtual AppUser? AppUser { get; set; }
 
         public virtual ICollection<OrderHamburger>? OrderHamburgers { get; set; }
         public virtual ICollection<OrderMenu>? OrderMenus { get; set; }

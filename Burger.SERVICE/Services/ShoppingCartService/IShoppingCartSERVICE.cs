@@ -19,5 +19,13 @@ namespace Burger.SERVICE.Services.ShoppingCartService
         Task<ShoppingCart> AddByProduct(int byProductId, int quantity);
 
         Task<ShoppingCart> GetCurrentUserShoppingcart();
+
+        Task<ShoppingCart> DeleteMenu(int menuId, int quantity);
+
+        Task<ShoppingCart> DeleteHamburger(int hamburgerId, int quantity);
+
+        Task<ShoppingCart> DeleteExtra(int extraId, int quantity);
+
+        Task<ShoppingCart> DeleteByProduct(int byProductId, int quantity);
     }
 }

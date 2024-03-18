@@ -24,12 +24,10 @@ namespace Burger.WEBUI.ViewComponents
                 CartItems = new List<CartItem>()
             };
 
-            model.CartItems.AddRange(currentUserShoppingCart.Menus.Select(menu => new CartItem() { Name = menu.Menu.Name, Quantity = menu.Quantity,Photo = menu.Menu.Photo }));
-            model.CartItems.AddRange(currentUserShoppingCart.Hamburgers.Select(burgers => new CartItem() { Name = burgers.Hamburger.Name, Quantity = burgers.Quantity , Photo = burgers.Hamburger.Photo }));
-            model.CartItems.AddRange(currentUserShoppingCart.Extras.Select(extra => new CartItem() { Name = extra.Extra.Name, Quantity = extra.Quantity }));
-            model.CartItems.AddRange(currentUserShoppingCart.ByProducts.Select(product => new CartItem() { Name = product.ByProduct.Name, Quantity = product.Quantity , Photo = product.ByProduct.Photo }));
-
-
+            model.CartItems.AddRange(currentUserShoppingCart.Menus.Select(menu => new CartItem() { Id=menu.MenuId, Name = menu.Menu.Name, Quantity = menu.Quantity,Photo = menu.Menu.Photo, Price = menu.Menu.Price,OrderType=menu.Menu.OrderType }));
+            model.CartItems.AddRange(currentUserShoppingCart.Hamburgers.Select(burgers => new CartItem() {Id=burgers.HamburgerId, Name = burgers.Hamburger.Name, Quantity = burgers.Quantity , Photo = burgers.Hamburger.Photo, Price=burgers.Hamburger.Price, OrderType = burgers.Hamburger.OrderType }));
+            model.CartItems.AddRange(currentUserShoppingCart.Extras.Select(extra => new CartItem() {Id=extra.ExtraId, Name = extra.Extra.Name, Quantity = extra.Quantity, Price = extra.Extra.Price, OrderType = extra.Extra.OrderType }));
+            model.CartItems.AddRange(currentUserShoppingCart.ByProducts.Select(product => new CartItem() {Id = product.ByProductId, Name = product.ByProduct.Name, Quantity = product.Quantity , Photo = product.ByProduct.Photo, Price = product.ByProduct.Price, OrderType = product.ByProduct.OrderType }));
 
             return View(model);
         }

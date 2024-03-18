@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Burger.REPO.Migrations
 {
-    public partial class init : Migration
+    public partial class db : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -63,6 +63,7 @@ namespace Burger.REPO.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Size = table.Column<int>(type: "int", nullable: false),
                     ByProductType = table.Column<int>(type: "int", nullable: false),
+                    OrderType = table.Column<int>(type: "int", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -82,6 +83,7 @@ namespace Burger.REPO.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OrderType = table.Column<int>(type: "int", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -102,6 +104,7 @@ namespace Burger.REPO.Migrations
                     Price = table.Column<double>(type: "float", nullable: false),
                     Photo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OrderType = table.Column<int>(type: "int", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -122,6 +125,7 @@ namespace Burger.REPO.Migrations
                     Price = table.Column<double>(type: "float", nullable: false),
                     Photo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OrderType = table.Column<int>(type: "int", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -130,6 +134,24 @@ namespace Burger.REPO.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Menus", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ShoppingCarts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TotalPrice = table.Column<double>(type: "float", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShoppingCarts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -245,7 +267,7 @@ namespace Burger.REPO.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TotalPrice = table.Column<double>(type: "float", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -349,6 +371,130 @@ namespace Burger.REPO.Migrations
                         name: "FK_MenuHamburgers_Menus_MenuId",
                         column: x => x.MenuId,
                         principalTable: "Menus",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ShoppingCartByProducts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ByProductId = table.Column<int>(type: "int", nullable: false),
+                    ShoppingCartId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShoppingCartByProducts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCartByProducts_ByProducts_ByProductId",
+                        column: x => x.ByProductId,
+                        principalTable: "ByProducts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCartByProducts_ShoppingCarts_ShoppingCartId",
+                        column: x => x.ShoppingCartId,
+                        principalTable: "ShoppingCarts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ShoppingCartExtras",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ExtraId = table.Column<int>(type: "int", nullable: false),
+                    ShoppingCartId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShoppingCartExtras", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCartExtras_Extras_ExtraId",
+                        column: x => x.ExtraId,
+                        principalTable: "Extras",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCartExtras_ShoppingCarts_ShoppingCartId",
+                        column: x => x.ShoppingCartId,
+                        principalTable: "ShoppingCarts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ShoppingCartHamburgers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    HamburgerId = table.Column<int>(type: "int", nullable: false),
+                    ShoppingCartId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShoppingCartHamburgers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCartHamburgers_Hamburger_HamburgerId",
+                        column: x => x.HamburgerId,
+                        principalTable: "Hamburger",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCartHamburgers_ShoppingCarts_ShoppingCartId",
+                        column: x => x.ShoppingCartId,
+                        principalTable: "ShoppingCarts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ShoppingCartMenus",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MenuId = table.Column<int>(type: "int", nullable: false),
+                    ShoppingCartId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShoppingCartMenus", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCartMenus_Menus_MenuId",
+                        column: x => x.MenuId,
+                        principalTable: "Menus",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCartMenus_ShoppingCarts_ShoppingCartId",
+                        column: x => x.ShoppingCartId,
+                        principalTable: "ShoppingCarts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -586,6 +732,46 @@ namespace Burger.REPO.Migrations
                 name: "IX_Orders_AppUserId",
                 table: "Orders",
                 column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCartByProducts_ByProductId",
+                table: "ShoppingCartByProducts",
+                column: "ByProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCartByProducts_ShoppingCartId",
+                table: "ShoppingCartByProducts",
+                column: "ShoppingCartId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCartExtras_ExtraId",
+                table: "ShoppingCartExtras",
+                column: "ExtraId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCartExtras_ShoppingCartId",
+                table: "ShoppingCartExtras",
+                column: "ShoppingCartId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCartHamburgers_HamburgerId",
+                table: "ShoppingCartHamburgers",
+                column: "HamburgerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCartHamburgers_ShoppingCartId",
+                table: "ShoppingCartHamburgers",
+                column: "ShoppingCartId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCartMenus_MenuId",
+                table: "ShoppingCartMenus",
+                column: "MenuId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCartMenus_ShoppingCartId",
+                table: "ShoppingCartMenus",
+                column: "ShoppingCartId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -627,7 +813,22 @@ namespace Burger.REPO.Migrations
                 name: "OrderMenus");
 
             migrationBuilder.DropTable(
+                name: "ShoppingCartByProducts");
+
+            migrationBuilder.DropTable(
+                name: "ShoppingCartExtras");
+
+            migrationBuilder.DropTable(
+                name: "ShoppingCartHamburgers");
+
+            migrationBuilder.DropTable(
+                name: "ShoppingCartMenus");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "ByProducts");
@@ -642,7 +843,7 @@ namespace Burger.REPO.Migrations
                 name: "Menus");
 
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "ShoppingCarts");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

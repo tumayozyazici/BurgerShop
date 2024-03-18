@@ -10,6 +10,7 @@ using Burger.SERVICE.Services.MenuByProductService;
 using Burger.SERVICE.Services.MenuHamburgerService;
 using Burger.SERVICE.Services.MenuService;
 using Burger.SERVICE.Services.OrderByProductService;
+using Burger.SERVICE.Services.OrderExtraService;
 using Burger.SERVICE.Services.OrderHamburgerService;
 using Burger.SERVICE.Services.OrderMenuService;
 using Burger.SERVICE.Services.OrderService;
@@ -44,6 +45,7 @@ namespace Burger.WEBUI
             builder.Services.AddScoped<IOrderHamburgerREPO, OrderHamburgerREPO>();
             builder.Services.AddScoped<IOrderMenuREPO, OrderMenuREPO>();
             builder.Services.AddScoped<IOrderREPO, OrderREPO>();
+            builder.Services.AddScoped<IOrderExtraREPO, OrderExtraREPO>();
             builder.Services.AddScoped<IShoppingCartREPO, ShoppingCartREPO>();
 
             // Service
@@ -58,6 +60,7 @@ namespace Burger.WEBUI
             builder.Services.AddScoped<IOrderHamburgerSERVICE, OrderHamburgerSERVICE>();
             builder.Services.AddScoped<IOrderMenuSERVICE, OrderMenuSERVICE>();
             builder.Services.AddScoped<IOrderSERVICE, OrderSERVICE>();
+            builder.Services.AddScoped<IOrderExtraSERVICE, OrderExtraSERVICE>();
             builder.Services.AddScoped<IShoppingCartSERVICE, ShoppingCartSERVICE>();
 
             builder.Services.AddAuthorization(options =>
