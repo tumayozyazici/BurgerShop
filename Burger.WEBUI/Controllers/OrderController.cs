@@ -88,7 +88,7 @@ namespace Burger.WEBUI.Controllers
                     shoppingCartService.DeleteHamburger(item.Id, item.Quantity);
                 }
             }
-            return RedirectToAction();
+            return RedirectToAction("Index","Home");
         }
     }
 }
