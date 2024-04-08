@@ -17,9 +17,9 @@ namespace Burger.SERVICE.Services.OrderByProductService
             _orderByProductREPO = orderByProductREPO;
         }
 
-        public int Create(IEnumerable<OrderByProduct> entities)
+        public async Task<int> Create(IEnumerable<OrderByProduct> entities)
         {
-            return _orderByProductREPO.Create(entities);
+            return await _orderByProductREPO.Create(entities);
         }
 
         public int Delete(IEnumerable<OrderByProduct> entities)

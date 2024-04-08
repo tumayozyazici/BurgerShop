@@ -7,37 +7,9 @@
 <div class="shopping-cart">
     <h2>Alışveriş Sepeti</h2>
     <ul>
-
         @foreach (Menu item in Model.Menus)
         {
-
             <li>@item.Name - @item.Price</li>
-
-
         }
-        @* if (item.Hamburgers != null)
-        {
-        @foreach (Hamburger burger in item.Hamburgers)
-        {
-        <li>@burger.Name - @burger.Price</li>
-        }
-        }
-        @if (item.ByProducts != null)
-        {
-        @foreach (ByProduct byProduct in item.ByProducts)
-        {
-        <li>@byProduct.Name - @byProduct.Price</li>
-        }
-        }
-        @if (item.Extras != null)
-        {
-        @foreach (Extra extra in item.Extras)
-        {
-        <li>@extra.Name - @extra.Price</li>
-        }
-        }
-        } *@
-
     </ul>
-    @* <p>Toplam Fiyat: @Model.TotalPrice</p> *@
 </div>

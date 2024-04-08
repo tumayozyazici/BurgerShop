@@ -17,9 +17,9 @@ namespace Burger.SERVICE.Services.OrderMenuService
             _orderMenuREPO = orderMenuREPO;
         }
 
-        public int Create(IEnumerable<OrderMenu> entities)
+        public async Task<int> Create(IEnumerable<OrderMenu> entities)
         {
-            return _orderMenuREPO.Create(entities);
+            return await _orderMenuREPO.Create(entities);
         }
 
         public int Delete(IEnumerable<OrderMenu> entities)

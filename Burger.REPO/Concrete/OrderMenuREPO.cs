@@ -17,10 +17,10 @@ namespace Burger.REPO.Concrete
             _dbContext = db;
         }
 
-        public int Create(IEnumerable<OrderMenu> entities)
+        public async Task<int> Create(IEnumerable<OrderMenu> entities)
         {
-            _dbContext.OrderMenus.AddRange(entities);
-            return _dbContext.SaveChanges();
+            await _dbContext.OrderMenus.AddRangeAsync(entities);
+            return await _dbContext.SaveChangesAsync();
         }
 
         public int Delete(IEnumerable<OrderMenu> entities)

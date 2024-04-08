@@ -9,7 +9,7 @@ namespace Burger.SERVICE.Services.OrderHamburgerService
 {
     public interface IOrderHamburgerSERVICE
     {
-        int Create(IEnumerable<OrderHamburger> entities);
+        Task<int> Create(IEnumerable<OrderHamburger> entities);
         int Update(IEnumerable<OrderHamburger> entities);
         int Delete(IEnumerable<OrderHamburger> entities);
         IEnumerable<OrderHamburger> GetByOrderId(int id);

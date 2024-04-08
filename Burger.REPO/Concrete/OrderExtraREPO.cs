@@ -19,10 +19,10 @@ namespace Burger.REPO.Concrete
             _dbContext = dbContext;
         }
 
-        public int Create(IEnumerable<OrderExtra> entities)
+        public async Task<int> Create(IEnumerable<OrderExtra> entities)
         {
-            _dbContext.OrderExtras.AddRange(entities);
-            return _dbContext.SaveChanges();
+            await _dbContext.OrderExtras.AddRangeAsync(entities);
+            return await _dbContext.SaveChangesAsync();
         }
 
         public int Delete(IEnumerable<OrderExtra> entities)

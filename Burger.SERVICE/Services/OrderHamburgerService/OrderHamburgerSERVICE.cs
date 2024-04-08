@@ -17,9 +17,9 @@ namespace Burger.SERVICE.Services.OrderHamburgerService
             _orderHamburgerREPO = orderHamburgerREPO;
         }
 
-        public int Create(IEnumerable<OrderHamburger> entities)
+        public async Task<int> Create(IEnumerable<OrderHamburger> entities)
         {
-            return _orderHamburgerREPO.Create(entities);
+            return await _orderHamburgerREPO.Create(entities);
         }
 
         public int Delete(IEnumerable<OrderHamburger> entities)

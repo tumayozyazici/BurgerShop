@@ -9,7 +9,7 @@ namespace Burger.REPO.Interface
 {
     public interface IOrderMenuREPO : IBaseREPO<OrderMenu>
     {
-        int Create(IEnumerable<OrderMenu> entities);
+        Task<int> Create(IEnumerable<OrderMenu> entities);
         int Update(IEnumerable<OrderMenu> entities);
         int Delete(IEnumerable<OrderMenu> entities);
         IEnumerable<OrderMenu> GetByOrderId(int id);

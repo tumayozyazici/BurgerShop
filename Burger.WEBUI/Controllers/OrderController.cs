@@ -47,7 +47,7 @@ namespace Burger.WEBUI.Controllers
             this.shoppingCartService = shoppingCartService;
             _currentUserId = Guid.Parse(httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Index(ShoppingCartVM vm)
         {
@@ -55,40 +55,42 @@ namespace Burger.WEBUI.Controllers
             order.TotalPrice = vm.TotalPrice;
             order.UserId = _currentUserId.ToString();
             orderService.Add(order);
-            
 
-            foreach (CartItem item in vm.CartItems)
+            if (vm.CartItems is not null)
             {
-                if (item.OrderType == OrderItems.Menu)
+                foreach (CartItem item in vm.CartItems)
                 {
-                    List<OrderMenu> orderMenu = new List<OrderMenu>();
-                    orderMenu.Add(new OrderMenu() { OrderId =order.Id, MenuId = item.Id });
-                    orderMenuService.Create(orderMenu);
-                    shoppingCartService.DeleteMenu(item.Id,item.Quantity);
-                }
-                if (item.OrderType == OrderItems.ByProduct)
-                {
-                    List<OrderByProduct> orderByProduct = new List<OrderByProduct>();
-                    orderByProduct.Add(new OrderByProduct() { OrderId = order.Id, ByProductId = item.Id });
-                    orderByProductService.Create(orderByProduct);
-                    shoppingCartService.DeleteByProduct(item.Id, item.Quantity);
-                }
-                if (item.OrderType == OrderItems.Extra)
-                {
-                    List<OrderExtra> orderExtra = new List<OrderExtra>();
-                    orderExtra.Add(new OrderExtra() { OrderId = order.Id, ExtraId = item.Id });
-                    orderExtraService.Create(orderExtra);
-                    shoppingCartService.DeleteExtra(item.Id, item.Quantity);
-                }
-                if (item.OrderType == OrderItems.Hamburger)
-                {
-                    List<OrderHamburger> orderHamburger = new List<OrderHamburger>();
-                    orderHamburger.Add(new OrderHamburger() { OrderId = order.Id, HamburgerId = item.Id });
-                    orderHamburgerService.Create(orderHamburger);
-                    shoppingCartService.DeleteHamburger(item.Id, item.Quantity);
+                    if (item.OrderType == OrderItems.Menu)
+                    {
+                        List<OrderMenu> orderMenu = new List<OrderMenu>();
+                        orderMenu.Add(new OrderMenu() { OrderId = order.Id, MenuId = item.Id });
+                        await orderMenuService.Create(orderMenu);
+                        shoppingCartService.DeleteMenu(item.Id, item.Quantity);
+                    }
+                    if (item.OrderType == OrderItems.ByProduct)
+                    {
+                        List<OrderByProduct> orderByProduct = new List<OrderByProduct>();
+                        orderByProduct.Add(new OrderByProduct() { OrderId = order.Id, ByProductId = item.Id });
+                        await orderByProductService.Create(orderByProduct);
+                        shoppingCartService.DeleteByProduct(item.Id, item.Quantity);
+                    }
+                    if (item.OrderType == OrderItems.Extra)
+                    {
+                        List<OrderExtra> orderExtra = new List<OrderExtra>();
+                        orderExtra.Add(new OrderExtra() { OrderId = order.Id, ExtraId = item.Id });
+                        await orderExtraService.Create(orderExtra);
+                        shoppingCartService.DeleteExtra(item.Id, item.Quantity);
+                    }
+                    if (item.OrderType == OrderItems.Hamburger)
+                    {
+                        List<OrderHamburger> orderHamburger = new List<OrderHamburger>();
+                        orderHamburger.Add(new OrderHamburger() { OrderId = order.Id, HamburgerId = item.Id });
+                        await orderHamburgerService.Create(orderHamburger);
+                        shoppingCartService.DeleteHamburger(item.Id, item.Quantity);
+                    }
                 }
             }
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

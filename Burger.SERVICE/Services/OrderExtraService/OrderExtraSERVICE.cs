@@ -17,9 +17,9 @@ namespace Burger.SERVICE.Services.OrderExtraService
             _orderExtraREPO = orderExtraREPO;
         }
 
-        public int Create(IEnumerable<OrderExtra> entities)
+        public async Task<int> Create(IEnumerable<OrderExtra> entities)
         {
-            return  _orderExtraREPO.Create(entities);
+            return await _orderExtraREPO.Create(entities);
         }
 
         public int Delete(IEnumerable<OrderExtra> entities)

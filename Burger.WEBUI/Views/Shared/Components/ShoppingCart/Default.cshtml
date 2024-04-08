@@ -27,6 +27,7 @@
                                 <input type="hidden" asp-for="CartItems[i].Quantity" />
                                 <input type="hidden" asp-for="CartItems[i].Price" />
                                 <input type="hidden" asp-for="CartItems[i].Photo" />
+                                <input type="hidden" asp-for="CartItems[i].OrderType" />
                                 <td><img src="@Model.CartItems[i].Photo" width="50" /></td>
                                 <td>
                                     @Model.CartItems[i].Quantity
